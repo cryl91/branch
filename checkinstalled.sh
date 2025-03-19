@@ -1,7 +1,7 @@
 #!/bin/bash
-user=$(id -u)
-name=$0
-file=/home/ec2-user/Linux/$name.log
+#user=$(id -u)
+#name=$0
+#file=/home/ec2-user/Linux/$name.log
 
 validate(){
 if [ $1 -ne 0 ] 
