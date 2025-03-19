@@ -9,4 +9,4 @@
 while read line
 do
 echo "$line"
-done < "code.sh"
+done < "Code.sh"
