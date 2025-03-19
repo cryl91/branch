@@ -1,8 +1,10 @@
 #!/bin/bash
 user=$(id -u)
+name=$0
+file=/home/ec2-user/Linux/$name.log
 
 validate(){
-if [ $1 -ne 0 ]
+if [ $1 -ne 0 ] 
 then
         echo "Installation failure"
         exit 1
@@ -19,10 +21,10 @@ then
         exit 1
 fi
 
-yum install git -y
+yum install git -y &>> $file
 
 validate $? "Installing git"
 
-yum install postfix -y
+yum install postfix -y &>> $file
 
 validate $? "Installing Postfix"
