@@ -6,7 +6,17 @@
 #((a++))
 #done
 
-while read line
-do
-echo "$line"
-done < "Code.sh"
+#while read line
+#do
+#echo "$line"
+#done < "Code.sh"
+
+var=$1
+
+while IFS= read -r line; do
+    if [[ "$line" == *$var* ]]; then
+        echo "Found it! --> $line"
+        # Optionally exit the loop early
+        break
+    fi
+done < Code.txt
