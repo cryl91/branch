@@ -7,7 +7,7 @@ then
         echo "Installation failure"
         exit 1
 else
-        echo "Installation success"
+        echo "$2 Installed success"
 fi
 
 }
@@ -21,4 +21,8 @@ fi
 
 yum install git -y
 
-validate $?
+validate $? "Installing git"
+
+yum install postfix -y
+
+validate $? "Installing Postfix"
