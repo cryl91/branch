@@ -19,4 +19,4 @@ while IFS= read -r line; do
         # Optionally exit the loop early
         break
     fi
-done < Code.txt
+done < Code.sh
