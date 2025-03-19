@@ -17,7 +17,7 @@ fi
 for i in $@
 do 
 yum list installed $i
-if [ $i -ne 0 ]
+if [ $? -ne 0 ]
     then 
         echo "$i not installed,lets install it"
         yum install $1 -y
