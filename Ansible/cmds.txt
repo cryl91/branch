@@ -1,6 +1,9 @@
-Login In
+Login In:
 ansible -i 34.207.116.91, all -e ansible_user=ec2-user --private-key "/home/ec2-user/copy.pem" -m ping
 ansible -i inventory ip -m ping -e ansible_user=ec2-user --private-key /home/ec2-user/copy.pem
 
-Install Nginx
+Install Nginx:
 ansible -i inventory ip -m ping -e ansible_user=ec2-user -e ansible_password=cyrilantony -m ansible.builtin.yum -a "name=nginx state=installed" --become
+
+Playbook Run:
+ansible-playbook -i inventory -e ansible_user=ec2-user -e ansible_password=cyrilantony Ping.yaml
