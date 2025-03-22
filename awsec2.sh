@@ -7,7 +7,7 @@ secgrp=sg-048539b811300092e
 
 for i in ${names[@]}
 do
-    if [ $i == "mongodb"]
+    if [[ $i == "mongodb"]]
     then 
     instancetype="t3.medium"
     else
