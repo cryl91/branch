@@ -14,6 +14,6 @@ do
     instancetype="t2.micro"
     fi
 echo "creating $i"
-aws ec2 run-instances --image-id $imageid --count 1 --instance-type $instancetype 
-
+ipaddress=$(aws ec2 run-instances --image-id $imageid --count 1 --instance-type $instancetype | jq -r '.instance[0].PrivateIpAddress')
+echo "$ipaddress"
 done
