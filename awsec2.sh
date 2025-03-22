@@ -1,13 +1,13 @@
 #!/bin/bash
 
-names=("mongodb" "reddis")
+names=("mongodb" "redis")
 instancetype=""
 imageid=ami-08b5b3a93ed654d19
 secgrp=sg-048539b811300092e
 
 for i in ${names[@]}
 do
-    if [[ $i == "mongodb"]]
+    if [ $i == "mongodb" ]
     then 
     instancetype="t3.medium"
     else
