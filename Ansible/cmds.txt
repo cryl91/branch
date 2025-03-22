@@ -1,0 +1,2 @@
+ansible -i 34.207.116.91, all -e ansible_user=ec2-user --private-key "/home/ec2-user/copy.pem" -m ping
+ansible -i inventory ip -m ping -e ansible_user=ec2-user --private-key /home/ec2-user/copy.pem
