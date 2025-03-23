@@ -13,4 +13,6 @@
     - course: development
     ansible.builtin.debug:
       msg: "The course is {{course}},the duration is {{duration}}"
-
+  - name: Print Variables from inventory 
+    ansible.builtin.debug:
+      msg: "The course is {{mongo_username}},the duration is {{mongo_password}}"
