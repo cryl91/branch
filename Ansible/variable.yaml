@@ -1,11 +1,11 @@
-- name: Nginx
+- name: vars
   hosts: web
   become: yes
   vars:
     course: devops
     duration: 1hr
   tasks: 
-  - name: Install Nginx
+  - name: Print Variables 
     ansible.builtin.debug:
       msg: "The course is {{course}},the duration is {{duration}}"
 
