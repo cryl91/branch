@@ -1,0 +1,20 @@
+- name: vars
+  hosts: localhost
+  tasks: 
+  - name: check user exists or not 
+    ansible.builtin.command: id roboshop
+    register: output # the register variable ie output stores the output of the command
+    ignore_errors: true
+  - name: Print command output 
+    ansible.builtin.debug:
+      msg: "The output is {{output}}"
+  - name: Print the exit status 
+    ansible.builtin.debug:
+      msg: "{{output.rc}}"
+  - name: Create User 
+    become: yes
+    ansible.builtin.user:
+      name: roboshop
+    when: output.rc != 0
+   
+  
