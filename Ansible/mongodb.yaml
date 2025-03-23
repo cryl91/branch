@@ -1,4 +1,4 @@
-- name: Nginx
+- name: Mongodb
   hosts: web
   become: yes
   tasks: 
