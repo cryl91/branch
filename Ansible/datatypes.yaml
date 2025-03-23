@@ -9,9 +9,9 @@
     - AWS
     - docker
   - Experience: #map
-    - devops: 7
-    - AWS: 2
-    - DOCKER: 3
+      devops: 7
+      AWS: 2
+      DOCKER: 3
   tasks: 
   - name: Print Variables 
     ansible.builtin.debug:
