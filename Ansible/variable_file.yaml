@@ -1,5 +1,5 @@
 - name: vars
-  hosts: localhost #managing the ansible server itself
+  hosts: localhost #managing the ansible server itself. If its localhost then you dont need to give username and password through ansible command line
   become: yes
   vars_files:
     vars.yaml

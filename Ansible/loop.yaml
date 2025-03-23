@@ -1,0 +1,14 @@
+- name: vars
+  hosts: localhost
+  become: yes
+  tasks: 
+  - name: Print Variables 
+    ansible.builtin.debug:
+      msg: "The course is {{item}}"
+    loop: 
+    - abc
+    - def
+    - hgi
+    - feq
+
+  

@@ -17,4 +17,13 @@
       name: roboshop
     when: output.rc != 0
    
+
+   #Simple when
+  #- name: Random 
+  #  vars:
+  #  name: abc  
+  #  ansible.builtin.debug:
+  #    msg: "Hello {{name}} 
+  #  when: name == "abc"
+   
   
