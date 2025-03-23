@@ -1,0 +1,15 @@
+- name: vars
+  hosts: localhost #managing the ansible server itself
+  become: yes
+  vars_prompt:
+  - name: username
+    prompt: Enter the username
+    private: false
+  - name: password
+    prompt: Enter the password
+    private: true
+  tasks: 
+  - name: Print Variables 
+    ansible.builtin.debug:
+      msg: "The username is {{username}},the password is {{password}}"
+
