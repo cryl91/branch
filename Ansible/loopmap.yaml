@@ -1,0 +1,12 @@
+- name: vars
+  hosts: web
+  become: yes
+  tasks: 
+  - name: Install and remove packages 
+    ansible.builtin.yum:
+      name: "{{item.name}}" 
+      state: "{{item.state}}"
+    loop: #list of map
+    - {name: 'nginx', state: 'absent'}
+    - {name: 'postfix', state: 'installed'}
+   
