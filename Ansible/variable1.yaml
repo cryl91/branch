@@ -1,5 +1,5 @@
 - name: vars
-  hosts: web
+  hosts: localhost #managing the ansible server itself
   become: yes
   vars_files:
     vars.yaml
