@@ -1,5 +1,5 @@
 - name: vars
-  hosts: web
+  hosts: all
   become: yes
   vars:
     course: devops
