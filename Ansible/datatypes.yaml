@@ -1,0 +1,24 @@
+- name: vars
+  hosts: web
+  become: yes
+  vars:
+  - course: devops
+  - duration: 1hr
+  - skills: #list
+    - devops
+    - AWS
+    - docker
+  - Experience: #map
+    - devops: 7
+    - AWS: 2
+    - DOCKER: 3
+  tasks: 
+  - name: Print Variables 
+    ansible.builtin.debug:
+      msg: "{{course}}
+  - name: Print Variables 
+    ansible.builtin.debug:
+      msg: "{{skills}}
+  - name: Print Variables 
+    ansible.builtin.debug:
+      msg: "{{Experience}}
