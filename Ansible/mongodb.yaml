@@ -1,0 +1,29 @@
+- name: Nginx
+  hosts: web
+  become: yes
+  tasks: 
+  - name: Install Nginx
+    ansible.builtin.copy:
+      src: mongodb.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  - name: nginx
+    ansible.builtin.yum:
+      name: mongodb
+      state: installed
+  - name: Starting mongodb
+    ansible.builtin.service:
+      name: mongodb
+      state: started
+      enabled: yes
+  - name: Replace old hostname with new hostname (requires Ansible >= 2.4)
+    ansible.builtin.replace:
+      path: /etc/mongod.conf
+      regexp: '127.0.0.1'
+      replace: '0.0.0.0'
+  - name: Restarting mongodb
+    ansible.builtin.service:
+      name: mongodb
+      state: restarted
+      
+  
+
