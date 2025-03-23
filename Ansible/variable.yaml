@@ -1,10 +1,16 @@
 - name: vars
   hosts: web
   become: yes
-  vars_files:
-    vars.yaml
+  vars:
+    course: devops
+    duration: 1hr
   tasks: 
   - name: Print Variables 
+    ansible.builtin.debug:
+      msg: "The course is {{course}},the duration is {{duration}}"
+  - name: Print Inheritance Variables 
+    vars:
+    - course: development
     ansible.builtin.debug:
       msg: "The course is {{course}},the duration is {{duration}}"
 
