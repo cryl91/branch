@@ -1,0 +1,5 @@
+- name: Installing roboshop
+  hosts: web
+  become: yes
+  roles:
+  - mongodb
