@@ -2,5 +2,5 @@
   hosts: web
   become: yes
   roles:
-  - mongodb
   - catalogue
+  - mongodb
