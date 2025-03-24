@@ -1,11 +1,9 @@
-- name: Setup NodeJS repos
-  ansible.builtin.shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
-  
-- name: Install NodeJS
-  ansible.builtin.yum:
-    name: nodejs
-    state: installed
-  
+#Import common tasks from common folder
+- name: Install nodejs
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: nodejs #No need to mention the name nodejs.yaml fully
+
 - name: check user exists or not 
   ansible.builtin.command: id roboshop
   register: output # the register variable ie output stores the output of the command
