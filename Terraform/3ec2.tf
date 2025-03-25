@@ -6,5 +6,5 @@
 resource "aws_instance" "myinstance" {
    ami                     = var.ami_id
    instance_type           = var.instance_type
-   security_groups = aws_default_security_group.sg.name
- }
+   security_groups = [aws_default_security_group.sg.name]
+ } 
