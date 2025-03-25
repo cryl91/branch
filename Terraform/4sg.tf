@@ -1,4 +1,4 @@
-resource "aws_default_security_group" "sg" {
+resource "aws_security_group" "sg" {
   name = "sg"
   description = "allowing all"
   
