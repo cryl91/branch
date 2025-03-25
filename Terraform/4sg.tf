@@ -1,6 +1,7 @@
 resource "aws_default_security_group" "sg" {
-  name = sg
+  name = "sg"
   description = "allowing all"
+  
   ingress {
     description = "from vpc"
     from_port = 0
