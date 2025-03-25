@@ -3,8 +3,7 @@
 #   instance_type           = "t2.micro"
 # }
 
-resource "aws_instance" "myinstance" 
-{
+resource "aws_instance" "myinstance" {
    ami                     = var.ami_id
    instance_type           = var.instance_type
  }
