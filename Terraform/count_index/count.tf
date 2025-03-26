@@ -11,3 +11,4 @@ resource "aws_instance" "myinstance" {
     tags = {
     name = var.instance_name[count.index]
  } 
+}
