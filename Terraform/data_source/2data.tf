@@ -1,3 +1,4 @@
+#To fetch AMI information
 data "aws_ami" "ami" {
     most_recent = true
     owners = ["amazon"] #you can give owner Account id(here aws account id)
@@ -12,4 +13,14 @@ filter {
 output "ami_id" {
   value = data.aws_ami.ami.id
 
+}
+
+#To fetch VPC information
+
+data "aws_vpc" "default" {
+  default = true 
+}
+
+output "vpc_info" {
+  value = data.aws_vpc.default
 }
