@@ -1,7 +1,6 @@
 resource "aws_instance" "myinstance" {
-   count = "1"
    ami                     = local.ami_id
-   instance_type           = "t2.micro"
+   instance_type           = local.instance_type
     } 
 
  resource "aws_key_pair" "key" {

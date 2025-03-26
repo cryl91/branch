@@ -2,5 +2,6 @@
 locals {
   ami_id = "ami-08b5b3a93ed654d19"
   pub_key = file("${path.module}/Linux.pub")
-  instance_type = instance_name == mongodb ? "t2.micro" : "t3.micro"
+  instance_type = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
+
 }
