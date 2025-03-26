@@ -5,7 +5,7 @@
 
 resource "aws_instance" "myinstance" {
    ami                     = var.ami_id
-   instance_type           = var.instance_name == "mongodb" ? t2.micro : t3.medium
+   instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t3.medium"
    security_groups = [aws_security_group.sg.name]
 
     # tags = {
