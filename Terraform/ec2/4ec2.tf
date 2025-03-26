@@ -4,6 +4,7 @@
 # }
 
 resource "aws_instance" "myinstance" {
+   count = "1"
    ami                     = var.ami_id
    instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
    security_groups = [aws_security_group.sg.name]
