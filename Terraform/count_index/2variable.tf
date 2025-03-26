@@ -1,4 +1,5 @@
 variable "instance_name"{ 
+    type = list
     default = ["mongodb", "cart", "catalogue", "user", "reddis", "mysql", "rabbitmq", "shipping", "payment", "web"]
 }
  
@@ -6,18 +7,4 @@ variable "instance_name"{
 variable "ami_id"{
 type = string
 default = "ami-08b5b3a93ed654d19"
-}
-
-variable "instance_type"{
-type = string
-default = "t2.micro"
-}
-
-variable "tags" {
-    type = map
-    default = { 
-        name = "mongodb"
-        Envirnoment = "dev"
-    
-    }
 }
