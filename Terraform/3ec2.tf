@@ -7,4 +7,11 @@ resource "aws_instance" "myinstance" {
    ami                     = var.ami_id
    instance_type           = var.instance_type
    security_groups = [aws_security_group.sg.name]
+
+    # tags = {
+    #   name = "mongodb"
+    #   Envirnoment = "dev"
+    # }
+
+    tags = var.tags
  } 

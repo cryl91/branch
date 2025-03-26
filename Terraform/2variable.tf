@@ -8,4 +8,11 @@ type = string
 default = "t2.micro"
 }
 
-
+variable "tags" {
+    type = map
+    default = { 
+        name = "mongodb"
+        Envirnoment = "dev"
+    
+    }
+}
