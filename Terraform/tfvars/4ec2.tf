@@ -5,6 +5,7 @@ resource "aws_instance" "myinstance" {
    tags = { 
     name = var.tags.name 
     Envirnoment = var.tags.Envirnoment
+   }
  } 
 
  output "aws_instance_info" { 
