@@ -1,7 +1,5 @@
 #dev tfvars
-instance_name = { 
-    "Dev-mongodb"
-}
+instance_name = "Dev-mongodb"
  
 tags = {
     name = "mongodb-dev"
