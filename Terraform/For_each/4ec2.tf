@@ -6,7 +6,8 @@
 resource "aws_instance" "myinstance" {
    
    ami                     = var.ami_id
-   instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
-  
-    tags = var.tags
+   instance_type           = each.key  
+   tags = {
+      name = each.value
+   }
  } 
