@@ -2,10 +2,7 @@ resource "aws_instance" "myinstance" {
    ami                     = var.ami_id
    instance_type           = var.instances  
    
-   tags = { 
-    name = var.tags.name 
-    Envirnoment = var.tags.Envirnoment
-   }
+   tags = var.tags
  } 
 
  output "aws_instance_info" { 
