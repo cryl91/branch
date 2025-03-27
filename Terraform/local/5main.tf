@@ -1,6 +1,4 @@
 resource "aws_instance" "myinstance" {
-   for_each = var.instances
-
    ami                     = local.ami_id
    instance_type           = local.instance_type
     } 
