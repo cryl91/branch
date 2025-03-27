@@ -6,13 +6,13 @@ terraform {
     }
   }
 
-  #Before locking the file, create a s3 bucket in aws
-  backend "s3" {
-    bucket = "terraform-bucket-cyril"
-    key    = "foreach-demo"
-    region = "us-east-1"
-    dynamodb_table = "cyril-lock"
-}
+#   #Before locking the file, create a s3 bucket and dynamodb table in aws
+#   backend "s3" {
+#     bucket = "terraform-bucket-cyril"
+#     key    = "foreach-demo"
+#     region = "us-east-1"
+#     dynamodb_table = "cyril-lock"
+# }
 
 }
 
