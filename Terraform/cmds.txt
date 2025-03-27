@@ -10,3 +10,5 @@ For running function:
 
 --locals are similar to variable but they also allow expressions and functions
 --data sources = you can query the data dynamically from source ie aws
+
+tfvars = terraform plan -var-file="prod.tfvars"
