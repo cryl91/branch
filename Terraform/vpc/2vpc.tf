@@ -44,6 +44,7 @@ resource "aws_route_table" "rtpublic" {
 
   tags = {
     Name = "RT Public"
+
   }
 }
 
