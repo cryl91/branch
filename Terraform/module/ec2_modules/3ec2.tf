@@ -4,5 +4,5 @@ resource "aws_instance" "myinstance" {
  } 
 
 output "instance" {
-  value = aws_instance.myinstance.public_ip 
+  value = aws_instance.myinstance.ami
 }
