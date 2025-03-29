@@ -50,6 +50,10 @@ resource "aws_route_table" "rtpublic" {
 resource "aws_route_table" "rtprivate" {
   vpc_id = aws_vpc.main.id
 
+  route {
+    cidr_block = "0.0.0.0/0"
+    nat_gateway_id = aws_nat_gateway.nat1.id
+  }
 
   tags = {
     Name = "RT Private"
@@ -66,6 +70,27 @@ resource "aws_route_table_association" "assprivate" {
   route_table_id = aws_route_table.rtprivate.id
 }
 
+#Setting up a NAT Gateway for private subnet. 
+#It needs 2 things = Elastic IP+ Nat gateway provisioned in public subnet(ie bcase to get internet access)
+
+#Creating Elastic IP
+resource "aws_eip" "eip" {
+  domain   = "vpc"
+}
+
+#Creating NAT Gateway
+resource "aws_nat_gateway" "nat1" {
+  allocation_id = aws_eip.eip.id
+  subnet_id     = aws_subnet.subnetpublic.id #Public subnet id give here
+
+  tags = {
+    Name = "gw NAT"
+  }
+
+  # To ensure proper ordering, it is recommended to add an explicit dependency
+  # on the Internet Gateway for the VPC.
+  depends_on = [aws_internet_gateway.ig]
+}
 
 #END OF VPC CREATION
 

@@ -4,5 +4,5 @@ resource "aws_instance" "myinstance" {
  } 
 
 output "pub_ip" {
-  value = aws_instance.myinstance.public_ip
+  value = aws_instance.myinstance.public_ip #Here you will call the output name that is defined in the module
 }
