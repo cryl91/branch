@@ -3,6 +3,6 @@ resource "aws_instance" "myinstance" {
    instance_type           = var.instance_type 
  } 
 
-output "instance" {
-  value = aws_instance.myinstance.ami
+output "pub_ip" {
+  value = aws_instance.myinstance.public_ip
 }
