@@ -7,5 +7,5 @@ instance_type = var.instance_type
 
 
 output "instance_id" {
-  value = module.ec2.ami
+  value = module.ec2.instance
 }
