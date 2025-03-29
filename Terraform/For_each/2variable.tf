@@ -22,6 +22,7 @@ variable "tags" {
     }
 }
 
+#This is key value pair
 variable "instances" {
    type = map 
    default = {
@@ -29,3 +30,13 @@ variable "instances" {
    mysql = "  t2.micro" 
    }
 }
+
+#This is how you define list/Array
+#variable "azs" {
+# default = ["us-east-1a", "us-east-1b"]
+# }
+
+#This is how you define list/Array
+#variable "subnet" {
+# default = ["10.0.0.1/24", "10.0.0.2/24"]
+# }

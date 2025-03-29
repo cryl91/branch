@@ -65,3 +65,38 @@ resource "aws_route_table_association" "assprivate" {
   subnet_id      = aws_subnet.subnetprivate.id
   route_table_id = aws_route_table.rtprivate.id
 }
+
+
+#END OF VPC CREATION
+
+#CREATE A SECURITY GROUP
+resource "aws_security_group" "sg" {
+  name = "sg"
+  description = "allowing all"
+  vpc_id = aws_vpc.main.id
+
+  ingress {
+    description = "from vpc"
+    from_port = 0
+    to_port   = 0
+    protocol = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"  #all protocols
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+} 
+
+resource "aws_instance" "publicinstance" {
+   ami                     = "ami-08b5b3a93ed654d19"
+   instance_type           = "t2.micro"
+   subnet_id = aws_subnet.subnetpublic.id
+   security_groups = [aws_security_group.sg.name]
+   associate_public_ip_address = "true"
+   } 
+
