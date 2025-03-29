@@ -6,8 +6,8 @@
 resource "aws_instance" "myinstance" {
    count = "1"
    ami                     = var.ami_id
-   #instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
-   instance_type = aws_ssm_parameter.instance_type.value  
+   instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
+   instance_type = data.aws_ssm_parameter.instance_type.value #to use the parameter store value 
    security_groups = [aws_security_group.sg.name]
 
     # tags = {
