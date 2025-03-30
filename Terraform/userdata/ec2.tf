@@ -5,6 +5,7 @@ module "ec21_instance" {
   ami = "ami-08b5b3a93ed654d19"
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.sg.name]
+  subnet_id = aws_subnet.subnetpublic.id
   user_data = file("install.sh")
 
   tags = {
