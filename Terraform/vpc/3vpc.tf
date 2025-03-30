@@ -8,7 +8,7 @@ tags = {
 }
 
 resource "aws_subnet" "subnetpublic1" {
-  vpc_id     = aws_vpc.main.id
+  vpc_id     = aws_vpc.main1.id
   cidr_block = "10.1.4.0/24"
 
   tags = {
