@@ -96,8 +96,8 @@ resource "aws_nat_gateway" "nat1" {
 #END OF VPC CREATION
 
 #CREATE A SECURITY GROUP
-resource "aws_security_group" "sg1" {
-  name = "sg1"
+resource "aws_security_group" "sg" {
+  name = "sg"
   description = "allowing all"
   vpc_id = aws_vpc.main.id
 
@@ -122,7 +122,7 @@ resource "aws_instance" "publicinstance" {
    ami                     = "ami-08b5b3a93ed654d19"
    instance_type           = "t2.micro"
    subnet_id = aws_subnet.subnetpublic.id
-   security_groups = [aws_security_group.sg1.name]
+   security_groups = [aws_security_group.sg.name]
    associate_public_ip_address = "true"
    user_data = file("install.sh")
    } 
