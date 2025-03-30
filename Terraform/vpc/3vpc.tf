@@ -1,5 +1,5 @@
 resource "aws_vpc" "main1" {
-  cidr_block = "10.1.0.0/16"
+  cidr_block = "10.1.1.0/24"
 tags = {
     name = "cyril"
     envirnoment = "dev"
@@ -9,7 +9,7 @@ tags = {
 
 resource "aws_subnet" "subnetpublic1" {
   vpc_id     = aws_vpc.main.id
-  cidr_block = "10.1.1.0/16"
+  cidr_block = "10.1.4.0/24"
 
   tags = {
     Name = "public"
