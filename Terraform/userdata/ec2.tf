@@ -134,4 +134,6 @@ module "ec21_instance" {
     Terraform   = "true"
     Environment = "dev"
   }
+  depends_on = [aws_subnet.subnetpublic]
 }
+
