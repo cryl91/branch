@@ -1,0 +1,10 @@
+  Paste the below filter code in = etc/logstash/conf.d/logstash.conf 
+   
+  Grok Filter = 
+
+    filter {
+      grok {
+        match => { "message" => "%{IP:client} %{WORD:method} 
+        %{URIPATHPARAM:request} %{NUMBER:bytes} %{NUMBER:duration}" }
+      }
+    } 
