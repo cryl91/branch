@@ -9,7 +9,7 @@ tags = {
 
 resource "aws_subnet" "subnetpublic1" {
   vpc_id     = aws_vpc.main1.id
-  cidr_block = "10.1.4.0/24"
+  cidr_block = "10.1.1.0/25"
 
   tags = {
     Name = "public"
