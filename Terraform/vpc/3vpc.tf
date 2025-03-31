@@ -1,7 +1,7 @@
 resource "aws_vpc" "main1" {
   cidr_block = "10.1.1.0/24"
 tags = {
-    name = "cyril"
+    name = "Second"
     envirnoment = "dev"
 }
 
@@ -74,6 +74,6 @@ resource "aws_instance" "publicinstance1" {
    instance_type           = "t2.micro"
    subnet_id = aws_subnet.subnetpublic1.id
    vpc_security_group_ids = [aws_security_group.sg1.id]
-   associate_public_ip_address = "true"
+   associate_public_ip_address = true
    } 
 
