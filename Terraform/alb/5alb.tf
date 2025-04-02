@@ -103,7 +103,7 @@ resource "aws_autoscaling_group" "aag" {
   health_check_type         = "ELB"
   desired_capacity          = 2
   #Specify the target group - to link target group and autoscaling group
-  target_group_arns = [aws_lb.target_group.catalogue.arn]
+  target_group_arns = [aws_lb_target_group.catalogue.arn]
   launch_template {
     id      = aws_launch_template.catalogue.id
     version = "$Latest"
