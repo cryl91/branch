@@ -18,7 +18,8 @@ resource "aws_lb_listener" "listener1" {
   
   #This will add one listener on port no 80 and one default rule
   default_action {
-    type = "fixed response"
+    type = "fixed-response"
+
     
   fixed_response {
       content_type = "text/plain"
