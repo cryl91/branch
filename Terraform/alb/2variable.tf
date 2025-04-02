@@ -16,7 +16,7 @@ default = "t2.micro"
 variable "tags" {
     type = map
     default = { 
-        name = "mongodb"
+        name = "web"
         Envirnoment = "dev"
     
     }
@@ -30,6 +30,15 @@ variable "instances" {
    mysql = "  t2.micro" 
    }
 }
+
+variable "default_subnet1"{
+    default = "subnet-0681e1e3a08354aa7"
+}
+
+variable "default_subnet1"{
+    default = "subnet-011e86df5b3dd7968"
+}
+
 
 #This is how you define list/Array
 #variable "azs" {
