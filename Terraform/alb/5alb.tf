@@ -18,7 +18,7 @@ resource "aws_lb_listener" "listener1" {
   
   #This will add one listener on port no 80 and one default rule
   default_action {
-    type = "fixed-response"
+    type = "fixed-response" #If you dont have instance, but to check its working, it will display fixed-response
 
     
   fixed_response {
@@ -29,6 +29,7 @@ resource "aws_lb_listener" "listener1" {
 
 }
 }
+
 
 #Target Group
 resource "aws_lb_target_group" "catalogue" {
@@ -50,6 +51,25 @@ resource "aws_lb_target_group" "catalogue" {
   
   }
 }
+
+#Creating Listener Rule
+resource "aws_lb_listener_rule" "static" {
+  listener_arn = aws_lb_listener.listener1.arn 
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.catalogue.arn
+  }
+
+  condition {
+    host_header {
+      values = ["catalogue.app.joindevops.online"] #define this in route 53
+    }
+  }
+}
+
+
 
 #Create launch template
 resource "aws_launch_template" "catalogue" {
@@ -82,6 +102,8 @@ resource "aws_autoscaling_group" "aag" {
   health_check_grace_period = 300
   health_check_type         = "ELB"
   desired_capacity          = 2
+  #Specify the target group - to link target group and autoscaling group
+  target_group_arns = [aws_lb.target_group.catalogue.arn]
   launch_template {
     id      = aws_launch_template.catalogue.id
     version = "$Latest"
@@ -109,20 +131,4 @@ resource "aws_autoscaling_policy" "aspolicy" {
   }
 }
 
-#Creating Listener Rule
-resource "aws_lb_listener_rule" "static" {
-  listener_arn = aws_lb_listener.listener1.arn 
-  priority     = 10
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.catalogue.arn
-  }
-
-  condition {
-    host_header {
-      values = ["catalogue.app.joindevops.online"] #define this in route 53
-    }
-  }
-}
 
