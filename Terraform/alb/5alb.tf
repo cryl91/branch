@@ -1,16 +1,32 @@
-resource "aws_lb" "alb" {
-  name               = "alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.sg_alb.id]
-  subnets            = [var.default_subnet11, var.default_subnet22]
-  
-#   enable_deletion_protection = true
-  tags = {
-    Environment = "security group alb"
+  resource "aws_lb" "alb" {
+    name               = "alb"
+    internal           = false
+    load_balancer_type = "application"
+    security_groups    = [aws_security_group.sg_alb.id]
+    subnets            = [var.default_subnet11, var.default_subnet22]
+    
+  #   enable_deletion_protection = true
+    tags = {
+      Environment = "security group alb"
+    }
   }
-}
 
+resource "aws_lb_listener" "listener1" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+  
+  #This will add one listener on port no 80 and one default rule
+  default_action {
+    type             = "Fixed Response"
+    
+  fixed_response {
+      content_type = "text/plain"
+      message_body = "Fixed response content"
+      status_code  = "200"
+    }
+
+}
 
 # resource "aws_instance" "myinstance" {
 #    ami                     = var.ami_id
