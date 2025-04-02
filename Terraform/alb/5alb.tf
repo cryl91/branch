@@ -81,7 +81,7 @@ resource "aws_autoscaling_group" "aag" {
   min_size                  = 2
   health_check_grace_period = 300
   health_check_type         = "ELB"
-  desired_capacity          = 4
+  desired_capacity          = 2
   launch_template {
     id      = aws_launch_template.catalogue.id
     version = "$Latest"
@@ -95,7 +95,7 @@ resource "aws_autoscaling_group" "aag" {
 }
 
 resource "aws_autoscaling_policy" "aspolicy" {
-  autoscaling_group_name = "aag"
+  autoscaling_group_name = aws_autoscaling_group.aag.name
   name                   = "as_policy"
   policy_type            = "TargetTrackingScaling"
   # ... other configuration ...
