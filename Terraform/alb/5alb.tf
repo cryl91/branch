@@ -28,6 +28,8 @@ resource "aws_lb_listener" "listener1" {
 
 }
 
+}
+
 # resource "aws_instance" "myinstance" {
 #    ami                     = var.ami_id
 #    instance_type           = var.instance_type  
