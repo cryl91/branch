@@ -2,19 +2,11 @@ resource "aws_lb" "alb" {
   name               = "alb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = [aws_security_group.lb_sg.id]
-  subnets            = [for subnet in aws_subnet.public : subnet.id]
-
-  enable_deletion_protection = true
-
-  access_logs {
-    bucket  = aws_s3_bucket.lb_logs.id
-    prefix  = "test-lb"
-    enabled = true
-  }
-
+  security_groups    = [data.aws_security_group.sg_alb.id]
+  
+#   enable_deletion_protection = true
   tags = {
-    Environment = "production"
+    Environment = "security group alb"
   }
 }
 
