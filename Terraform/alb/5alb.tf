@@ -30,6 +30,53 @@ resource "aws_lb_listener" "listener1" {
 }
 }
 
+#Target Group
+resource "aws_lb_target_group" "catalogue" {
+  name     = "catalogue"
+  port     = 8080
+  protocol = "HTTP"
+  vpc_id   = "vpc-0dfc63964a304e93b"
+  #Enable a health check
+  health_check {
+    enabled = true
+    healthy_threshold = 2 #consider as health if 2 health check are success ie url is called 2 times and if both times url is not responding then its unhealthy
+    interval = 15
+    matcher = "200-299"
+    path = "/health"
+    port = 8080
+    protocol = "HTTP"
+    timeout = 5 #if you dont get response within 5 seconds then we can consider it as failure
+    unhealthy_threshold = 3 #3 consecutive requests fail, then it is unhealthy
+  
+  }
+}
+
+#Create launch template
+resource "aws_launch_template" "catalogue" {
+  name = "catalogue"
+
+  image_id = "ami-08b5b3a93ed654d19"
+
+  instance_initiated_shutdown_behavior = "terminate"
+
+  instance_type = "t2.micro"
+
+  
+  vpc_security_group_ids = [aws_security_group.sg_alb.id]
+
+  tag_specifications {
+    resource_type = "instance"
+
+    tags = {
+      Name = "Catalogue"
+    }
+  }
+
+#user_data = filebase64("${path.module}/catalogue.sh") #create a catalogue.sh file in the same directory to run shell commands once the instance is created
+}
+
+
+
 # resource "aws_instance" "myinstance" {
 #    ami                     = var.ami_id
 #    instance_type           = var.instance_type  
