@@ -36,17 +36,26 @@ resource "aws_internet_gateway" "ig" {
 #public route table will have internet attached
 resource "aws_route_table" "rtpublic" {
   vpc_id = aws_vpc.main.id
-
-  route {
-    cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.ig.id
-  }
+  #Add Route separately beacuse when you add peering route, aws will consider only
+  #one route should be there as below and delete the below route. So keep this separately 
+  # route {
+  #   cidr_block = "0.0.0.0/0"
+  #   gateway_id = aws_internet_gateway.ig.id
+  # }
 
   tags = {
     Name = "RT Public"
 
   }
 }
+
+resource "aws_route" "vpc1_public" {
+  route_table_id            = aws_route_table.rtpublic.id
+  destination_cidr_block    = "0.0.0.0/0"
+  gateway_id = aws_internet_gateway.ig.id
+  
+}
+
 
 resource "aws_route_table" "rtprivate" {
   vpc_id = aws_vpc.main.id
