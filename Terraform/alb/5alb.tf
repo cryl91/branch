@@ -18,7 +18,7 @@ resource "aws_lb_listener" "listener1" {
   
   #This will add one listener on port no 80 and one default rule
   default_action {
-    type             = "Fixed Response"
+    type = "fixed response"
     
   fixed_response {
       content_type = "text/plain"
@@ -27,7 +27,6 @@ resource "aws_lb_listener" "listener1" {
     }
 
 }
-
 }
 
 # resource "aws_instance" "myinstance" {
