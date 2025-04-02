@@ -75,25 +75,54 @@ resource "aws_launch_template" "catalogue" {
 #user_data = filebase64("${path.module}/catalogue.sh") #create a catalogue.sh file in the same directory to run shell commands once the instance is created
 }
 
+resource "aws_autoscaling_group" "aag" {
+  name                      = "aag"
+  max_size                  = 3
+  min_size                  = 2
+  health_check_grace_period = 300
+  health_check_type         = "ELB"
+  desired_capacity          = 4
+  launch_template {
+    id      = aws_launch_template.catalogue.id
+    version = "$Latest"
+  }
+  vpc_zone_identifier       = [var.default_subnet11, var.default_subnet22]  
 
+  timeouts {
+    delete = "15m"
+  }
 
-# resource "aws_instance" "myinstance" {
-#    ami                     = var.ami_id
-#    instance_type           = var.instance_type  
-#    
-#    tags = var.tags
-# 
-#  } 
+}
 
-#  output "aws_instance_info" { 
-#    value = aws_instance.myinstance
-#  }
+resource "aws_autoscaling_policy" "aspolicy" {
+  autoscaling_group_name = "aag"
+  name                   = "as_policy"
+  policy_type            = "TargetTrackingScaling"
+  # ... other configuration ...
 
-# resource "aws_route53_record" "record" {
-#   for_each = aws_instance.instances #You can give like this also
-#   zone_id = #give hosted zone id
-#   name    = "${var.instance_name[count.index]}.joindevops.online" #interpolation ie fixed value "joindevops.online" is combined with variable
-#   type    = "A"
-#   ttl     = 1
-#   records = [ each.key == "web" ? each.value.public_ip : each.value.private_ip ]
-# }
+  target_tracking_configuration {
+    predefined_metric_specification {
+      predefined_metric_type = "ASGAverageCPUUtilization"
+    }
+
+    target_value = 50.0
+  }
+}
+
+#Creating Listener Rule
+resource "aws_lb_listener_rule" "static" {
+  listener_arn = aws_lb_listener.listener1.arn 
+  priority     = 10
+
+  action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.catalogue.arn
+  }
+
+  condition {
+    host_header {
+      values = ["catalogue.app.joindevops.online"] #define this in route 53
+    }
+  }
+}
+
