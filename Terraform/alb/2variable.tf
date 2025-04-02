@@ -31,11 +31,11 @@ variable "instances" {
    }
 }
 
-variable "default_subnet1"{
+variable "default_subnet11"{
     default = "subnet-0681e1e3a08354aa7"
 }
 
-variable "default_subnet1"{
+variable "default_subnet22"{
     default = "subnet-011e86df5b3dd7968"
 }
 

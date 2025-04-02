@@ -3,7 +3,7 @@ resource "aws_lb" "alb" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.sg_alb.id]
-  subnets            = [var.default_subnet1, var.default_subnet2]
+  subnets            = [var.default_subnet11, var.default_subnet22]
   
 #   enable_deletion_protection = true
   tags = {
