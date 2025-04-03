@@ -11,26 +11,6 @@
     }
   }
 
-resource "aws_lb_listener" "listener1" {
-  load_balancer_arn = aws_lb.alb.arn
-  port              = "80"
-  protocol          = "HTTP"
-  
-  #This will add one listener on port no 80 and one default rule
-  default_action {
-    type = "fixed-response" #If you dont have instance, but to check its working, it will display fixed-response
-
-    
-  fixed_response {
-      content_type = "text/plain"
-      message_body = "Fixed response content"
-      status_code  = "200"
-    }
-
-}
-}
-
-
 #Target Group
 resource "aws_lb_target_group" "catalogue" {
   name     = "catalogue"
@@ -52,7 +32,28 @@ resource "aws_lb_target_group" "catalogue" {
   }
 }
 
-#Creating Listener Rule
+#Creating Listener
+resource "aws_lb_listener" "listener1" {
+  load_balancer_arn = aws_lb.alb.arn
+  port              = "80"
+  protocol          = "HTTP"
+  
+  #This will add one listener on port no 80 and one default rule
+  default_action {
+    type = "fixed-response" #If you dont have instance, but to check its working, it will display fixed-response
+
+    
+  fixed_response {
+      content_type = "text/plain"
+      message_body = "Fixed response content"
+      status_code  = "200"
+    }
+
+}
+}
+
+
+#Creating Listener's Rule
 resource "aws_lb_listener_rule" "static" {
   listener_arn = aws_lb_listener.listener1.arn 
   priority     = 10
