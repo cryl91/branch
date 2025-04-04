@@ -1,14 +1,24 @@
 pipeline {
-    agent any
+    agent any //To run on different agent = agent { node { label 'agent1' } }
     stages {
-        stage('Stage 1') {
+        stage('Build') {
             steps {
-                echo 'Hello world!'
+                echo 'Building'
             }
         }
-        stage('Stage 2') {
+        stage('Test') {
             steps {
-                echo 'Stage 2!'
+                echo 'Testing'
+            }
+        }
+        stage('Artifactcreation') {
+            steps {
+                echo 'Creating of artifact'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy'
             }
         }
     }
