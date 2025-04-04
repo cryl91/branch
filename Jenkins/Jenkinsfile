@@ -21,5 +21,18 @@ pipeline {
                 echo 'Deploy'
             }
         }
+
+        post {
+            always {
+                echo "I will run everytime"
+            }
+
+            success {
+                echo "I will run only on success"
+            }
+            failure {
+                echo "I will run only on failure"
+            }
+        }
     }
 } 
