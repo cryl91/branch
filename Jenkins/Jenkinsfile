@@ -4,6 +4,10 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building'
+                sh 'pwd' //one way to write shell commands.Below is the other method
+                ''' 
+                ls -l
+                '''
             }
         }
         stage('Test') {
