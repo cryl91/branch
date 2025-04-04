@@ -22,6 +22,8 @@ pipeline {
             }
         }
 
+    }
+
         post {
             always {
                 echo "I will run everytime"
@@ -34,5 +36,5 @@ pipeline {
                 echo "I will run only on failure"
             }
         }
-    }
+    
 } 
