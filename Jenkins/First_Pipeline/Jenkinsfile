@@ -50,6 +50,7 @@ pipeline {
         }
 
         //Parallel Execution
+        stages('Parallel Tasks') {
         parallel { 
         stage('Parallel 1') {
             steps {
@@ -60,6 +61,7 @@ pipeline {
             steps {
                 echo 'Parallel 2 Executed'
             }
+        }
         }
         }
         //End Parallel Execution
