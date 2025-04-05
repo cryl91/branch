@@ -1,5 +1,8 @@
 pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
+    options {
+        ansiColor('xterm')
+    }
     stages {
         stage('init') {
             steps {
