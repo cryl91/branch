@@ -21,7 +21,9 @@ pipeline {
                 printenv
                 '''
 
-                sh '''
+                //Use triple double quotes (""") instead of single quotes (''') 
+                //to allow Groovy to evaluate variables before passing them to the shell.
+                sh """ /
                 echo "Hello ${params.PERSON}"
 
                 echo "Biography: ${params.BIOGRAPHY}"
@@ -31,7 +33,7 @@ pipeline {
                 echo "Choice: ${params.CHOICE}"
 
                 echo "Password: ${params.PASSWORD}"
-                '''
+                """
             } 
         }
         stage('Test') {
