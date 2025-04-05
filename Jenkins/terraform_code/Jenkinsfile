@@ -5,7 +5,7 @@ pipeline {
             steps {
                 sh ''' 
                 ls -ltr
-                cd terraform_code
+                cd jenkins/terraform_code
                 echo "Pwd is:"
                 pwd
                 terraform init
@@ -15,7 +15,7 @@ pipeline {
         stage('Plan') {
             steps {
                 sh'''
-                cd terraform_code
+                cd Jenkins/terraform_code
                 terraform plan
                 '''
             }
