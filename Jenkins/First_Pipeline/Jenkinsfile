@@ -1,0 +1,45 @@
+pipeline {
+    agent any //To run on different agent = agent { node { label 'agent1' } }
+    stages {
+        stage('Build') {
+            steps {
+                echo 'Building'
+                sh 'pwd' //one way to write shell commands.Below is the other method
+                
+                sh ''' 
+                ls -l
+                '''
+            } 
+        }
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+        stage('Artifactcreation') {
+            steps {
+                echo 'Creating of artifact'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                echo 'Deploy1'
+            }
+        }
+
+    }
+
+        post {
+            always {
+                echo "I will run everytime"
+            }
+
+            success {
+                echo "I will run only on success"
+            }
+            failure {
+                echo "I will run only on failure"
+            }
+        }
+    
+} 
