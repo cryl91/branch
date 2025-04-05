@@ -23,14 +23,14 @@ pipeline {
                 '''
             }
         }
-        stage('Artifactcreation') {
+        stage('Approve') {
             steps {
-                echo 'Creating of artifact'
+                input "shall i apply"
             }
         }
-        stage('Deploy') {
+        stage('Apply') {
             steps {
-                echo 'Deploy1'
+                echo 'Applied'
             }
         }
 
