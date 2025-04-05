@@ -22,7 +22,7 @@ pipeline {
                 '''
 
                 sh '''
-                echo "Hello ${params.abc}"
+                echo "Hello ${params.PERSON}"
 
                 echo "Biography: ${params.BIOGRAPHY}"
 
