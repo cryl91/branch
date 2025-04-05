@@ -52,17 +52,17 @@ pipeline {
         //Parallel Execution
         stages('Parallel Tasks') {
         parallel { 
-        stage('Parallel 1') {
-            steps {
-                echo 'Parallel 1 Executed'
+            stage('Parallel 1') {
+                steps {
+                    echo 'Parallel 1 Executed'
+                }
             }
-        }
-        stage('Parallel 2') {
-            steps {
-                echo 'Parallel 2 Executed'
+            stage('Parallel 2') {
+                steps {
+                    echo 'Parallel 2 Executed'
+                    }
+                }
             }
-        }
-        }
         }
         //End Parallel Execution
         stage('Artifactcreation') {
