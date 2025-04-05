@@ -21,8 +21,8 @@ pipeline {
                 printenv
                 '''
 
-                sh'''
-                echo "Hello ${params.PERSON}"
+                sh '''
+                echo "Hello ${params.abc}"
 
                 echo "Biography: ${params.BIOGRAPHY}"
 
