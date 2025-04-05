@@ -4,6 +4,9 @@ pipeline {
         stage('init') {
             steps {
                 sh ''' 
+                ls -ltr
+                echo "Pwd is:"
+                pwd
                 terraform init
                 '''
             } 
