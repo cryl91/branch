@@ -50,7 +50,7 @@ pipeline {
         }
 
         //Parallel Execution
-        stages('Parallel Tasks') {
+        stage('Parallel Tasks') {
         parallel { 
             stage('Parallel 1') {
                 steps {
