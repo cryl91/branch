@@ -1,8 +1,9 @@
 pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
-    envirnoment{
-        user = 'abc'
+    environment {
+    user = 'abc'
     }
+    
     stages {
         stage('Build') {
             steps {
