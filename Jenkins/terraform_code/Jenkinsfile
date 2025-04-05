@@ -6,8 +6,9 @@ pipeline {
                 sh ''' 
                 cd Jenkins/terraform_code
                 ls -ltr
-                
-                
+                echo "Pwd is the:"
+                pwd
+                terraform init
                 '''
             } 
         }
