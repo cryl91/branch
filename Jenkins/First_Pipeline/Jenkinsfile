@@ -10,6 +10,10 @@ pipeline {
         choice(name: 'CHOICE', choices: ['One', 'Two', 'Three'], description: 'Pick something')
         password(name: 'PASSWORD', defaultValue: 'SECRET', description: 'Enter a password')
     }
+    //Triggers to build the pipleine every one minute. But to see its effect run for the first time and from second time it will trigger every 1min
+    //triggers {
+    //    cron ('* * * * *')
+    //}
     stages {
         stage('Build') {
             steps {
@@ -37,6 +41,9 @@ pipeline {
             } 
         }
         stage('Test') {
+            when {
+                branch 'main'
+            }
             steps {
                 echo 'Testing'
             }
