@@ -23,7 +23,7 @@ pipeline {
 
                 //Use triple double quotes (""") instead of single quotes (''') 
                 //to allow Groovy to evaluate variables before passing them to the shell.
-                sh """ /
+                sh """ 
                 echo "Hello ${params.PERSON}"
 
                 echo "Biography: ${params.BIOGRAPHY}"
