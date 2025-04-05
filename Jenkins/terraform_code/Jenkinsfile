@@ -5,9 +5,9 @@ pipeline {
             steps {
                 sh ''' 
                 ls -ltr
+                cd terraform_code
                 echo "Pwd is:"
                 pwd
-                cd terraform_code
                 terraform init
                 '''
             } 
