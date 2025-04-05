@@ -30,7 +30,11 @@ pipeline {
         }
         stage('Apply') {
             steps {
-                echo 'Applied'
+                sh 'echo "Applied"'
+                //sh'''
+                //cd Jenkins/terraform_code
+                //terraform plan
+                //'''
             }
         }
 
