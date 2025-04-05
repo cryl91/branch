@@ -4,8 +4,8 @@ pipeline {
         stage('init') {
             steps {
                 sh ''' 
-                ls -ltr
                 cd jenkins/terraform_code
+                ls -ltr
                 echo "Pwd is:"
                 pwd
                 terraform init
