@@ -39,9 +39,25 @@ pipeline {
                 //or use this = zip -r catalogue.zip . -x "*.git*" "*.zip"
             }
         }
-        stage('Deploy') {
+        stage('Deploy to Nexus') {
             steps {
                 echo 'Deploy1'
+            //     nexusArtifactUploader(
+            //     nexusVersion: 'nexus3',
+            //     protocol: 'http',
+            //     nexusUrl: 'http://10.0.0.1/',
+            //     groupId: 'com.roboshop',
+            //     version: '1.0.0',
+            //     repository: 'catalogue',
+            //     credentialsId: 'Nexux-auth', //create this in manage jenkins->credentials->system->global credentials->add creadentials->username,password,id->add id to this code here
+            //     artifacts: [
+            //         [artifactId: catalogue,
+            //         classifier: '',
+            //         file: 'catalogue.zip',
+            //         type: 'zip']
+            //     ]
+            // )
+
             }
         }
     }
