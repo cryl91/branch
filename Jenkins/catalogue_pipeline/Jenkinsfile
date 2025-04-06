@@ -48,7 +48,7 @@ pipeline {
         post {
             always {
                 echo "I will run everytime and clean up the directory"
-                deleteDir()
+               // deleteDir()
             }
 
             success {
