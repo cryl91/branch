@@ -2,7 +2,7 @@ pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
     
     stages {
-
+         
         stage('Unit Test') { 
             steps {
                 echo 'Unit Testing done' 
@@ -11,6 +11,7 @@ pipeline {
         //Sonar-scanner command expects sonar-project.properties should be available otherwise you will get error
         stage('SonarScan') {
             steps {
+                
                 sh 'sonar-scanner'
             }
         }
