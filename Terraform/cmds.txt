@@ -12,3 +12,20 @@ For running function:
 --data sources = you can query the data dynamically from source ie aws
 
 tfvars = terraform plan -var-file="prod.tfvars"
+
+
+sonarscanner conf changes = 
+        1. Install Sonarqube on a seperate server with t2.medium cpu 
+        2. Install SonarScanner on your jenkins server
+        3. conf changes = vim /opt/sonar-scanner/conf/ sonar-scanner.properties
+        #Configure here general information about the environment, such as SonarQube server connection details for example
+        #No information about specific project should appear here
+
+        #----- Default SonarQube server
+        sonar.host.url=http://18.206.176.145:9000
+        sonar.login=sqa_34f5295ff76d310038d9fc10ce463dc1c0b2095f //This login token you get by creating a token in sonarqube->top-right->myprofile->security->generate token
+
+        #----- Default source code encoding
+        #sonar.sourceEncoding=UTF-8
+
+        4. Create sonar_project.properties

@@ -66,7 +66,7 @@ resource "aws_lb_listener_rule" "static" {
   condition {
     host_header {
       values = ["catalogue.app.joindevops.online"] #define this in route 53
-    }
+    } #path based means = values = ["/catalogue/*"]
   }
 }
 
