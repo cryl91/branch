@@ -16,6 +16,6 @@ resource "aws_instance" "myinstance" {
     tags = var.tags
 
   provisioner "local-exec" {
-    command = "echo The server's IP address is ${self.private_ip} > file1"
+    command = "echo ${self.private_ip} > file1"
   }
 } 
