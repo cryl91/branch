@@ -1,1 +1,1 @@
-This is git
+This is git. From feature1. Second change
