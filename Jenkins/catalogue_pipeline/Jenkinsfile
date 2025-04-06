@@ -20,7 +20,6 @@ pipeline {
         //Sonar-scanner command expects sonar-project.properties should be available otherwise you will get error
         stage('SonarScan') {
             steps {
-                sh 'cd Jenkins/catalogue_pipeline'
                 sh 'sonar-scanner'
             }
         }
