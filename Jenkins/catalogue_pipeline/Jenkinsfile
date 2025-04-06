@@ -2,16 +2,17 @@ pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
     
     stages {
-        // stage('Install Dependencies') {
-        //     steps {
-        //         sh ''' 
-        //         cd Jenkins/catalogue_pipeline
-        //         npm install
-        //         npm audit fix
-        //         pwd
-        //         '''
-        //     } 
-        // }
+         stage('Install Dependencies') {
+            steps {
+             sh ''' 
+            ls -ltr 
+             cd Jenkins/catalogue_pipeline
+                 npm install
+                 npm audit fix
+                 pwd
+            '''
+             } 
+     }
         stage('Unit Test') {
             steps {
                 echo 'Unit Testing done' 
