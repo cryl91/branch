@@ -2,3 +2,4 @@ This is git. From feature1. Second change
 cyril1616 change
 cyril1616 change 2
 rebase1
+feature2
