@@ -7,6 +7,7 @@ pipeline {
                 sh ''' 
                 cd Jenkins/catalogue_pipeline
                 npm install
+                npm audit fix
                 pwd
                 '''
             } 
