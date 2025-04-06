@@ -33,6 +33,7 @@ pipeline {
             steps {
                 sh 'ls -ltr'
                 sh''' 
+                cd Jenkins/catalogue_pipeline
                 zip -r catalogue.zip ./* --exclude=.git --exclude=.zip
                 '''           
                 //or use this = zip -r catalogue.zip . -x "*.git*" "*.zip"
