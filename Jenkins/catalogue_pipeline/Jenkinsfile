@@ -2,22 +2,41 @@ pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
     
     stages {
-        
+         stage('Install Dependencies') {
+            steps {
+             sh ''' 
+            ls -ltr 
+             cd Jenkins/catalogue_pipeline
+                 npm install
+                 npm audit fix
+                 npm audit fix --force
+
+                 pwd
+            '''
+             } 
+     }
         stage('Unit Test') { 
             steps {
                 echo 'Unit Testing done' 
             }
         }
         //Sonar-scanner command expects sonar-project.properties should be available otherwise you will get error
-        stage('SonarScan') {
-            steps {
+        // stage('SonarScan') {
+        //     steps {
                  
-                 sh 'cd Jenkins/catalogue_pipeline'
-                 sh '/opt/sonar-scanner/bin/sonar-scanner'
+        //       dir('Jenkins/catalogue_pipeline'){
+        //           sh '/opt/sonar-scanner/bin/sonar-scanner'
+        //      }
+        //     //To use sh command use like this = sh 'cd Jenkins/catalogue_pipeline && /opt/sonar-scanner/bin/sonar-scanner'   
+        //     }
+        // }
+        stage('Build') {
+            steps {
+                sh 'ls -ltr'
+                sh 'zip -r ./* --exclude=.git --exclude=.zip'
             }
-            //dir('Jenkins/catalogue_pipeline')
         }
-        stage('Deploy') {
+        stage('Build') {
             steps {
                 echo 'Deploy1'
             }
@@ -26,7 +45,8 @@ pipeline {
 
         post {
             always {
-                echo "I will run everytime"
+                echo "I will run everytime and clean up the directory"
+                deletedir()
             }
 
             success {
