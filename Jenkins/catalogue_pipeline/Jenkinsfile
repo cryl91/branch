@@ -12,7 +12,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                echo 'Unit Testing done'
+                echo 'Unit Testing done' 
             }
         }
         //Sonar-scanner command expects sonar-project.properties should be available otherwise you will get error
