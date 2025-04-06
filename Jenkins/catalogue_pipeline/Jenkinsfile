@@ -2,23 +2,23 @@ pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
     
     stages {
-        stage('Build') {
+        stage('Install Dependencies') {
             steps {
-                echo 'Building'
                 sh ''' 
-                ls -l
+                npm install
+                pwd
                 '''
             } 
         }
-        stage('Test') {
+        stage('Unit Test') {
             steps {
-                echo 'Testing'
+                echo 'Unit Testing done'
             }
         }
-
-        stage('Artifactcreation') {
+        //Sonar-scanner command expects sonar-project.properties should be available otherwise you will get error
+        stage('SonarScan') {
             steps {
-                echo 'Creating of artifact'
+                sh 'sonar-scanner'
             }
         }
         stage('Deploy') {
