@@ -1,0 +1,7 @@
+--How to add repo = 
+1. Create repo in github
+2. Create repo in local computer
+3. In local computer = Git init+ git remote add origin <Http-URL-of-your-repo>
+4. Local computer = git add .; git commit -m "First" ; git push origin main
+
+--branch = git branch -m main

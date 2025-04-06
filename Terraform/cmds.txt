@@ -11,10 +11,17 @@ For running function:
 --locals are similar to variable but they also allow expressions and functions
 --data sources = you can query the data dynamically from source ie aws
 
-tfvars = terraform plan -var-file="prod.tfvars"
+--tfvars = terraform plan -var-file="prod.tfvars"
 
+--Increase tmp space
+        1. sudo rm -rf /tmp/*
+        2. cd /var/lib/jenkins
+        sudo du -sh *
+        3.sudo mount -o remount,size=4G /tmp
+        4. JAVA_ARGS="-Djava.io.tmpdir=/var/lib/jenkins/tmp"
+        5. sudo systemctl restart jenkins
 
-sonarscanner conf changes = 
+--sonarscanner conf changes = 
         1. Install Sonarqube on a seperate server with t2.medium cpu 
         2. Install SonarScanner on your jenkins server
         3. conf changes = vim /opt/sonar-scanner/conf/ sonar-scanner.properties
