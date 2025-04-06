@@ -5,6 +5,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh ''' 
+                cd Jenkins/catalogue_pipeline
                 npm install
                 pwd
                 '''
