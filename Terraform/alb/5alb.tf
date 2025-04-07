@@ -93,7 +93,7 @@ resource "aws_launch_template" "catalogue" {
     }
   }
 
-#user_data = filebase64("${path.module}/catalogue.sh") #create a catalogue.sh file in the same directory to run shell commands once the instance is created
+#user_data = file("${path.module}/catalogue.sh") #create a catalogue.sh file in the same directory to run shell commands once the instance is created
 }
 
 resource "aws_autoscaling_group" "aag" {
