@@ -36,3 +36,4 @@ For running function:
         #sonar.sourceEncoding=UTF-8
 
         4. Create sonar_project.properties
+--Variables usage in terraform = name = ${var.project_name}-catalogue-${var.env}
