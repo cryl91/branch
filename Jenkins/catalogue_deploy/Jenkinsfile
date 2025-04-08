@@ -26,13 +26,17 @@ pipeline {
                 '''
             } 
         }
+        //params.version variable flow = Jenkins ->Terraform->catalogue.sh->Ansible ++++ For doing this have variable declaration in terraform and ansible  
         stage('Create EC2 Instance-apply') { //Make sure terraform is installed and also aws configure done inside agent
             steps {
                 sh ''' 
-                terraform apply -auto-approve
+                terraform apply -auto-approve -var="app_version=${params.version}" 
                 '''
             } 
-        }    
+        }
+        //Once the instance is created, call remote provisioner and copy the catalogue script into ec2 and run it
+        //Use null resource remote provisioner as normal provisioner works only if instance is not already created. While null resource works on already created instance. 
+            
         stage('Apply') {
             steps {
                 sh 'echo "Applied"'

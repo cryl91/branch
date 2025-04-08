@@ -22,6 +22,11 @@ variable "tags" {
     }
 }
 
+variable "app_version" {
+  type = string
+  default = "1.0.0"
+}
+
 #This is how you define list/Array
 #variable "azs" {
 # default = ["us-east-1a", "us-east-1b"]

@@ -15,3 +15,38 @@ resource "aws_instance" "myinstance" {
 
     tags = var.tags
  } 
+
+ resource "null_resource" "cluster" {
+  triggers = {
+  instance_id = aws_instance.myinstance.id
+   }
+
+#Bootstrap script can run on any instance of the cluster
+#So we just choose the first in this case
+connection {
+  type = "ssh"
+  user = "centos"
+  password = "devops123"
+  host= self.private_ip
+}
+
+//to copy the file into a folder
+provisioner "file" { 
+  source ="catalogue.sh"
+  destination = "/tmp/catalogue.sh"
+}
+
+//here write the commands that needs to be executed
+ provisioner "remote-exec" {
+   inline = [
+      "chmod +x /tmp/catalogue.sh",
+      "sudo su /tmp/catalogue.sh ${var.app_version}"
+   ]
+ }
+
+ }
+ 
+ output "app_version" {
+   value = var.app_version  
+ }
+ 
