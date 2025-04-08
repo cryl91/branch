@@ -1,7 +1,21 @@
 pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
-    
+    environment{ //Here if you create any variable you will have global issues. Since its environment no need of def.
+        packageversion = ''
+    }
+    parameters {
+        string(name: 'version', defaultValue: '1.0.0', description: 'Which version to deploy?')
+    }
     stages {
+         stage('Get Version') {
+            steps {
+                script { //You need to mention script word for groovy
+                def packagejson = readJSON(file: 'package.json')
+                def packageversion = packagejson.version
+                echo "version: ${packageversion}"
+                }
+            }
+         }
          stage('Install Dependencies') {
             steps {
              sh ''' 
@@ -39,6 +53,7 @@ pipeline {
                 //or use this = zip -r catalogue.zip . -x "*.git*" "*.zip"
             }
         }
+        //Install pipeline utility steps plugin, if not installed. It adds a set of common helper functions to Jenkins Declarative and Scripted Pipelines — especially for dealing with files, archives, JSON, YAML, properties files, and more.
         stage('Deploy to Nexus') {
             steps {
                 echo 'Deploy1'
@@ -47,9 +62,9 @@ pipeline {
             //     protocol: 'http',
             //     nexusUrl: 'http://10.0.0.1/',
             //     groupId: 'com.roboshop',
-            //     version: '1.0.0',
+            //     version: "packageversion", //Put the version variable here
             //     repository: 'catalogue',
-            //     credentialsId: 'Nexux-auth', //create this in manage jenkins->credentials->system->global credentials->add creadentials->username,password,id->add id to this code here
+            //     credentialsId: 'Nexux-auth', //crea  te  t his in manage jenkins->credentials->system->global credentials->add creadentials->username,password,id->add id to this code here
             //     artifacts: [
             //         [artifactId: catalogue,
             //         classifier: '',
@@ -60,6 +75,20 @@ pipeline {
 
             }
         }
+        //If CI successful then call deployment pipeline.Also need to pass package version for deployment
+        stage('Calling Deployment') { 
+            steps {
+                script{
+                def params = [ //to use paramters use params keyword.
+                string(name: 'version', defaultValue: "$packageversion", description: 'Which version to deploy?')
+                ]
+                echo 'Calling Deployment Pipeline'
+                build job: "../catalogue-deploy", wait: true, parameters: params //wait: true means this job will wait unit that downstream job is over
+                
+                }
+            }
+        }
+
     }
 
         post {

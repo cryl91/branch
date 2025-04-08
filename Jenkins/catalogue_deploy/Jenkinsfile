@@ -1,0 +1,57 @@
+pipeline {
+    agent any //To run on different agent = agent { node { label 'agent1' } }
+    parameters {
+        string(name: 'version', defaultValue: '1.0.0', description: 'Which version to deploy?')
+    }
+    stages {
+        stage('Version') {
+            steps {
+                sh ''' 
+                echo "Version is: ${params.version}"
+                '''
+             }
+        }
+        stage('Create EC2 Instance-init') { //Make sure terraform is installed and also aws configure done inside agent
+            steps {
+                sh ''' 
+                cd terraform_ec2
+                terraform init -reconfigure
+                '''
+            } 
+        }
+        stage('Create EC2 Instance-plan') { //Make sure terraform is installed and also aws configure done inside agent
+            steps {
+                sh ''' 
+                terraform plan
+                '''
+            } 
+        }
+        stage('Create EC2 Instance-apply') { //Make sure terraform is installed and also aws configure done inside agent
+            steps {
+                sh ''' 
+                terraform apply -auto-approve
+                '''
+            } 
+        }    
+        stage('Apply') {
+            steps {
+                sh 'echo "Applied"'
+            }
+        }
+
+    }
+
+        post {
+            always {
+                echo "I will run everytime"
+            }
+
+            success {
+                echo "I will run only on success"
+            }
+            failure {
+                echo "I will run only on failure"
+            }
+        }
+    
+} 
