@@ -1,4 +1,6 @@
 #!/bin/bash
+set -xe
+
 APP_VERSION=$1
 yum install python3 python3-pip -y
 pip3 install --upgrade pip

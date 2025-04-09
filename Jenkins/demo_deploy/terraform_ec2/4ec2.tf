@@ -44,11 +44,14 @@ resource "aws_instance" "catalogue" {
   }
 
   provisioner "remote-exec" {
-    inline = [
-      "chmod +x /tmp/catalogue.sh",
-      "sudo bash -c '/tmp/catalogue.sh > /tmp/catalogue.log 2>&1'"
-    ]
-  }
+  inline = [
+    "chmod +x /tmp/catalogue.sh",
+    "sudo bash /tmp/catalogue.sh > /tmp/catalogue.log 2>&1",
+    "EXIT_CODE=$?",
+    "cat /tmp/catalogue.log",
+    "exit $EXIT_CODE"
+  ]
+}
 }
 
 //Stop the instance and take the ami_id and delete instance
