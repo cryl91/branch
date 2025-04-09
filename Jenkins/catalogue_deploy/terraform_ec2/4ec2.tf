@@ -69,7 +69,7 @@ resource "null_resource" "delete_instance" {
    }
 
 provisioner "local-exec" {
-    command = "aws ec2 terminate-instances --instance-ids aws_instance.catalogue.id"
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
   }
 }
 //The remaining process is alb steps = load balancer,targetgroup,listener,rule,launch template,autoscaling group,auroscaling policy

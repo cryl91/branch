@@ -50,7 +50,7 @@ provisioner "file" {
  provisioner "remote-exec" {
    inline = [
       "chmod +x /tmp/catalogue.sh",
-      "sudo /tmp/catalogue.sh"
+      "sudo bash -c '/tmp/catalogue.sh > /tmp/catalogue.log 2>&1'"
    ]
  }
 
@@ -75,7 +75,8 @@ resource "null_resource" "delete_instance" {
    }
 
 provisioner "local-exec" {
-    command = "aws ec2 terminate-instances --instance-ids aws_instance.catalogue.id"
+    command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
+
   }
  depends_on = [ aws_ami_from_instance.catalogue_ami ]
  
