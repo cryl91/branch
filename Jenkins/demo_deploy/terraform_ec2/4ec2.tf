@@ -31,12 +31,14 @@ resource "aws_instance" "catalogue" {
  resource "aws_ec2_instance_state" "catalogue_instance" {
   instance_id = aws_instance.catalogue.id
   state       = "stopped"
+  depends_on = [ aws_instance.catalogue ]
   //depends_on = [ null_resource.cluster ]
 }
  //taking ami_id
   resource "aws_ami_from_instance" "catalogue_ami" {
   name = "My_instance's Ami"
   source_instance_id = aws_instance.catalogue.id
+  depends_on = [ aws_ami_from_instance.catalogue_ami ]
 }
 
 //delete instance using aws command line. But for this to run you must have aws command line installed on the jenkins server
