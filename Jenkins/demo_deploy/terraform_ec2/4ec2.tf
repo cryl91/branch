@@ -68,7 +68,7 @@ resource "aws_instance" "catalogue" {
  }
 
  //delete instance using aws command line. But for this to run you must have aws command line installed on the jenkins server
- resource "null_resource" "delete instance" {
+ resource "null_resource" "delete_instance" {
    triggers = {
    instance_id = aws_ami_from_instance.catalogue_ami.id
     }
