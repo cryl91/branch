@@ -72,11 +72,12 @@ provisioner "file" {
 resource "null_resource" "delete_instance" {
   triggers = {
   instance_id = aws_ami_from_instance.catalogue_ami.id
-  depends_on = [ aws_ami_from_instance.catalogue_ami ]
    }
 
 provisioner "local-exec" {
     command = "aws ec2 terminate-instances --instance-ids aws_instance.catalogue.id"
   }
+ depends_on = [ aws_ami_from_instance.catalogue_ami ]
+ 
 }
 //The remaining process is alb steps = load balancer,targetgroup,listener,rule,launch template,autoscaling group,auroscaling policy
