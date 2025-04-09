@@ -35,7 +35,7 @@ resource "aws_instance" "catalogue" {
   type        = "ssh"
   user        = "ec2-user"
   private_key = file("terraform.pem") # Path to your private key
-  host        = aws_instance.catalogue.private_ip
+  host        = aws_instance.catalogue.public_ip
 
 }
 
