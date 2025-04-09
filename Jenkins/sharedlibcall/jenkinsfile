@@ -1,0 +1,11 @@
+#!groovy
+@library('library') //shared library name you created in jenkins
+//library_name->filename. This filename you call in the jenkinsfile
+
+def configmap = [
+    person: "abc",
+    rollnum: "123"
+]
+
+//This is the groovy filename and function inside it. 
+filename1.function1(configmap)

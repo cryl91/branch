@@ -1,2 +1,0 @@
-#!groovy
-@library('library') //shared library name you created in jenkins
