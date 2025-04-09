@@ -50,7 +50,7 @@ resource "aws_instance" "catalogue" {
   provisioner "remote-exec" {
     inline = [
        "chmod +x /tmp/catalogue.sh",
-       "sudo su /tmp/catalogue.sh"
+       "sudo /tmp/catalogue.sh"
     ]
   }
 
@@ -61,6 +61,7 @@ resource "aws_instance" "catalogue" {
   resource "aws_ec2_instance_state" "catalogue_instance" {
    instance_id = aws_instance.catalogue.id
    state       = "stopped"
+   depends_on = [ aws_ami_from_instance.catalogue_ami ]
  }
   //taking ami_id
    resource "aws_ami_from_instance" "catalogue_ami" {
@@ -75,7 +76,7 @@ resource "aws_instance" "catalogue" {
     }
 
  provisioner "local-exec" {
-     command = "aws ec2 terminate-instances --instance-ids aws_instance.catalogue.id"
+     command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
    }
  }
  //The remaining process is alb steps = load balancer,targetgroup,listener,rule,launch template,autoscaling group,auroscaling policy
