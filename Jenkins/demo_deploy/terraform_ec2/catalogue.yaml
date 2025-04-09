@@ -1,0 +1,94 @@
+- name: Catalogue
+  hosts: web
+  become: yes
+  vars:
+    app_version: "1.0.0"
+    nexus_url: http://172.31.0.0:8081/repository
+    group_id: "com/roboshop"
+    nexus_username: admin
+    nexus_password: admin
+  tasks: 
+  - name: Print app version
+    ansible.built.debug: 
+      msg: "The app version is {{app_version }}"
+  
+  - name: Setup NodeJS repos
+    ansible.builtin.shell: "curl -sL https://rpm.nodesource.com/setup_lts.x | bash"
+  
+  - name: Install NodeJS
+    ansible.builtin.yum:
+      name: nodejs
+      state: installed
+  
+  - name: check user exists or not 
+    ansible.builtin.command: id roboshop
+    register: output # the register variable ie output stores the output of the command
+    ignore_errors: true
+  
+  - when: output.rc != 0
+    name: Create User roboshop
+    ansible.builtin.user:
+      name: roboshop
+  
+  - name: check directory exists or not  
+    ansible.builtin.stat:
+      path: /tmp/app
+    register: directory
+
+  - name: print the directory stats
+    ansible.builtin.debug: 
+      msg: "output is {{directory}}"  
+
+  - when: directory.stat.exists == False
+    name: create /app directory
+    ansible.builtin.file:
+      path: /tmp/app
+      state: directory
+
+  # - name: download catalogue artifact
+  #   ansible.builtin.get_url:
+  #     url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+  #     dest: /tmp
+
+  - name: download artifact from nexus
+    ansible.builtin.get_url:
+      url: "{{nexus_url}}/{{component}}/{{group_id}}/{{component}}/{{app_version}}/{{component}}/{{app_version}}.zip"
+      dest: "/tmp/{{component}}-{{app_version}}.zip"
+      username: "{{nexus_username}}"
+      password: "{{nexus_password}}"
+
+  - name: extract catalogue artifact
+    ansible.builtin.unarchive: 
+      src: "/tmp/{{component}}-{{app_version}}.zip"
+      dest: /app
+      remote_src: yes 
+
+  - name: install dependencies
+    ansible.builtin.command: npm install
+    args: #Args allows you to move to /app directory and run npm install
+      chdir: /app
+
+  - name: copy catalogue service
+    ansible.builtin.copy:
+      src: catalogue.service
+      dest: /etc/systemd/system/catalogue.service
+
+  - name: Daemon reload
+    ansible.builtin.systemd: 
+      state: restarted
+      daemon_reload: true
+      name: catalogue 
+
+  - name: Install Mongodb
+    ansible.builtin.yum:
+      name: mongodb-org-shell
+      state: installed 
+
+  - name: Load Catalogue Data 
+    ansible.builtin.command: mongo --host MONGODB-SERVER-IPADDRESS < /app/schema/catalogue.js
+
+  - name: Restarting catalogue
+    ansible.builtin.service:
+      name: catalogue
+      state: restarted
+      
