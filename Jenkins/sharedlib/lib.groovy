@@ -4,7 +4,8 @@ pipeline {
     user = 'abc'
     }
     parameters {
-        string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        string(name: 'Person', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
+        string(name: 'Rollnum', defaultValue: 'abc', description: 'Demo?')
         }
     
     stages {
@@ -13,7 +14,8 @@ pipeline {
                 //Use triple double quotes (""") instead of single quotes (''') 
                 //to allow Groovy to evaluate variables before passing them to the shell.
                 sh """ 
-                echo "Hello ${params.PERSON}"
+                echo "Hello ${params.Person}"
+                echo "${params.Rollnum}"
                 """
             } 
         }
