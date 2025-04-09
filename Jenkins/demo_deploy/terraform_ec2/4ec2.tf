@@ -50,20 +50,17 @@ provisioner "file" {
  provisioner "remote-exec" {
    inline = [
       "chmod +x /tmp/catalogue.sh",
-      "sudo su /tmp/catalogue.sh ${var.app_version}"
+      "sudo /tmp/catalogue.sh"
    ]
  }
 
- }
- 
- output "app_version" {
-   value = var.app_version  
  }
 
 //Stop the instance and take the ami_id and delete instance
  resource "aws_ec2_instance_state" "catalogue_instance" {
   instance_id = aws_instance.catalogue.id
   state       = "stopped"
+  depends_on = [ aws_ami_from_instance.catalogue_ami ]
 }
  //taking ami_id
   resource "aws_ami_from_instance" "catalogue_ami" {
@@ -72,9 +69,10 @@ provisioner "file" {
 }
 
 //delete instance using aws command line. But for this to run you must have aws command line installed on the jenkins server
-resource "null_resource" "delete instance" {
+resource "null_resource" "delete_instance" {
   triggers = {
   instance_id = aws_ami_from_instance.catalogue_ami.id
+  depends_on = [ aws_ami_from_instance.catalogue_ami ]
    }
 
 provisioner "local-exec" {
