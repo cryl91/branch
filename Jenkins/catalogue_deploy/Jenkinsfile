@@ -22,7 +22,7 @@ pipeline {
         stage('Create EC2 Instance-plan') { //Make sure terraform is installed and also aws configure done inside agent
             steps {
                 sh ''' 
-                terraform plan
+                terraform plan -var="app_version=${params.version}"
                 '''
             } 
         }
