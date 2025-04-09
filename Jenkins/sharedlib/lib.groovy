@@ -1,3 +1,6 @@
+def call1(map configmap) {
+//to get one of the value in configmap
+def component = configmap.get("rollnum")
 pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
     environment {
@@ -35,3 +38,4 @@ pipeline {
         }
     
 } 
+}

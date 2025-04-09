@@ -1,6 +1,9 @@
 #!groovy
 @library('library') //shared library name you created in jenkins
 //library_name->filename. This filename you call in the jenkinsfile
+//Everything in a library is function, you can call a function particulary like <file-name>.<function_name>
+//if you have a function with a name call(), then no need to specifically mention function-name 
+
 
 def configmap = [
     person: "abc",
@@ -9,3 +12,17 @@ def configmap = [
 
 //This is the groovy filename and function inside it. 
 filename1.function1(configmap) 
+
+def decidePIpeline (Map configemap){
+    application = configmap.get("application")
+    switch (application): {
+    case 'filename1.groovy'
+     echo "the file is filename1"
+     break    
+    case 'lib.groovy'
+     echo "the file is lib"
+    break
+    default:
+    error "unreognized application"
+    }
+}
