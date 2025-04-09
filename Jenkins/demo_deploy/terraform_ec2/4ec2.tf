@@ -67,6 +67,8 @@ resource "aws_instance" "catalogue" {
    resource "aws_ami_from_instance" "catalogue_ami" {
    name = "My_instance's Ami"
    source_instance_id = aws_instance.catalogue.id
+   depends_on = [null_resource.cluster]
+
  }
 
  //delete instance using aws command line. But for this to run you must have aws command line installed on the jenkins server
@@ -78,5 +80,6 @@ resource "aws_instance" "catalogue" {
  provisioner "local-exec" {
      command = "aws ec2 terminate-instances --instance-ids ${aws_instance.catalogue.id}"
    }
+  depends_on = [aws_ec2_instance_state.catalogue_instance]
  }
  //The remaining process is alb steps = load balancer,targetgroup,listener,rule,launch template,autoscaling group,auroscaling policy
