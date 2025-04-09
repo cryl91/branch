@@ -2,7 +2,11 @@
   hosts: web
   become: yes
   vars:
-  - app_version = "1.0.0"
+    app_version: "1.0.0"
+    nexus_url: http://172.31.0.0:8081/repository
+    group_id: "com/roboshop"
+    nexus_username: admin
+    nexus_password: admin
   tasks: 
   - name: Print app version
     ansible.built.debug: 
@@ -41,14 +45,21 @@
       path: /tmp/app
       state: directory
 
-  - name: download catalogue artifact
+  # - name: download catalogue artifact
+  #   ansible.builtin.get_url:
+  #     url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+  #     dest: /tmp
+
+  - name: download artifact from nexus
     ansible.builtin.get_url:
-      url: https://roboshop-builds.s3.amazonaws.com/catalogue.zip
-      dest: /tmp
+      url: "{{nexus_url}}/{{component}}/{{group_id}}/{{component}}/{{app_version}}/{{component}}/{{app_version}}.zip"
+      dest: "/tmp/{{component}}-{{app_version}}.zip"
+      username: "{{nexus_username}}"
+      password: "{{nexus_password}}"
 
   - name: extract catalogue artifact
     ansible.builtin.unarchive: 
-      src: /tmp/catalogue.zip
+      src: "/tmp/{{component}}-{{app_version}}.zip"
       dest: /app
       remote_src: yes 
 

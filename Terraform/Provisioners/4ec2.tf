@@ -15,6 +15,7 @@ resource "aws_instance" "remote" {
   ami                     = var.ami_id
   instance_type           = var.instance_type
 
+//to connect to remote server
   connection {
     type     = "ssh"
     user     = "root"
