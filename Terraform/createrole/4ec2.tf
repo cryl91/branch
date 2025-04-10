@@ -46,6 +46,4 @@ resource "aws_instance" "myinstance" {
    instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
    iam_instance_profile = aws_iam_instance_profile.ec2_profile.name 
    tags = var.tags
- }  
-
- 
+ } 
