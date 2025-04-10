@@ -31,10 +31,19 @@ resource "aws_iam_role_policy_attachment" "ec2_ssm_access" {
   policy_arn = "arn:aws:iam::aws:policy/AmazonSSMReadOnlyAccess"
 }
 
+# Create Instance Profile. aws_iam_instance_profile needed?
+//EC2 instances can’t directly use IAM roles.
+//Instead, they use an instance profile, which acts as a "wrapper" for the role.
+//This profile is then attached to the EC2 instance to allow it to assume the IAM role.
 
+resource "aws_iam_instance_profile" "ec2_profile" {
+  name = "ec2_instance_profile"
+  role = aws_iam_role.ec2_ssm_access.name
+}
 
-# resource "aws_instance" "myinstance" {
-#    ami                     = var.ami_id
-#    instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
-#     tags = var.tags
-#  } 
+resource "aws_instance" "myinstance" {
+   ami                     = var.ami_id
+   instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
+   iam_instance_profile = aws_iam_instance_profile.ec2_profile.name 
+   tags = var.tags
+ } 
