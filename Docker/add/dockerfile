@@ -1,0 +1,10 @@
+FROM almalinux:8 
+
+#Add is to copy your local files to the containers
+ADD index.html /tmp/
+
+#Can download contents direclty from the internet to a location
+ADD https://github.com/cryl91/Linux /tmp/
+
+#Can untar the file. Keep the tar file in this repository
+#ADD sample.tar /tmp/
