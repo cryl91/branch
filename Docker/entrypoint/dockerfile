@@ -1,5 +1,10 @@
 #almalinux is same as centos
 FROM almalinux:8 
-Run yum install epel-release -y
-Run yum install nginx -y
-ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
+#The below is the way to use entrypoint command
+#ENTRYPOINT ["ping", "-c5", "facebook.com;"]
+
+#For best results combine entrypoint with cmd
+CMD ["google.com"]
+ENTRYPOINT ["ping", "-c5"]
+ 
