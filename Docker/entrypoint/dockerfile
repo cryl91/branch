@@ -1,0 +1,5 @@
+#almalinux is same as centos
+FROM almalinux:8 
+Run yum install epel-release -y
+Run yum install nginx -y
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
