@@ -2,3 +2,4 @@
 FROM almalinux:8 
 run yum install epel-release -y
 Run yum install nginx -y
+cmd [ "nginx", "g", "daemonoff;" ]
