@@ -6,7 +6,11 @@ LABEL course=devops \
       trainer=shiva \
       duration=100hrs  
 EXPOSE 80/tcp
-COPY new.html /usr/share/nginx/html/new.html
+
+#Remove index.html to copy your index.html to the file
+RUN rm -rf /usr/share/nginx/html/index.html
+COPY index.html /usr/share/nginx/html/index.html
+
 ENV Name=shiva \
     age=25 \
     address=bangalore
