@@ -6,6 +6,7 @@ LABEL course=devops \
       trainer=shiva \
       duration=100hrs  
 EXPOSE 80/tcp
+COPY index.html /usr/share/nginx/html/new.html
 ENV Name=shiva \
     age=25 \
     address=bangalore
