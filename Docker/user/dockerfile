@@ -1,4 +1,8 @@
-FROM almalinux:8 
+#Arg is to supply variables at build time
+#Arg variable before from will not work after from
+ARG version
+FROM almalinux:${version}  
+RUN echo "Hi the version is {version}" > /tmp/hello.txt
 
 RUN useradd cyril
 USER cyril
@@ -6,3 +10,4 @@ RUN echo "Hi Docker" > /tmp/hello.txt
 
 #Sets the current working directory to /tmp. This is similar to cd tmp/
 WORKDIR /tmp
+
