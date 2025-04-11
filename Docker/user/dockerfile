@@ -1,0 +1,4 @@
+FROM almalinux:8 
+RUN useradd cyril
+USER cyril
+RUN echo "Hi Docker" > /tmp/hello.txt
