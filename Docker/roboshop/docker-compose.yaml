@@ -6,7 +6,7 @@ services:
   web:
     image: web:1
     container_name: web
-    network: 
+    networks: 
       - roboshop
     ports: 
       - "80:80" 
