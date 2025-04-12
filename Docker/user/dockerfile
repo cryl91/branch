@@ -6,7 +6,11 @@ FROM almalinux:${version}
 
 RUN useradd cyril
 USER cyril
-RUN echo "Hi Docker" > /tmp/hello.txt
+RUN echo "Hi Docker /" > /tmp/hello.txt
 
 #Sets the current working directory to /tmp. This is similar to cd tmp/
 WORKDIR /tmp
+
+ARG course=abc
+RUN echo "The course is ${course} " >> /tmp/hello.txt
+ 
