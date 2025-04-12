@@ -2,7 +2,7 @@
 #Arg variable before from will not work after from
 ARG version
 FROM almalinux:${version}  
-RUN echo "Hi the version is {version}" > /tmp/hello.txt
+#RUN echo "Hi the version is {version}" > /tmp/hello.txt
 
 RUN useradd cyril
 USER cyril
