@@ -1,8 +1,7 @@
 #Arg is to supply variables at build time
 #Arg variable before from will not work after from
-#${version:8} passes default value
-ARG version
-FROM almalinux:${version:8}   
+ARG version=8
+FROM almalinux:${version}   
 #RUN echo "Hi the version is {version}" > /tmp/hello.txt
 
 RUN useradd cyril
