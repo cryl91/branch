@@ -1,0 +1,7 @@
+#Onbuild allows you to make rules
+#Onbuild instruction will not execute at the time of image build by developer. Onbuild will will execute at the time one use your image 
+FROM almalinux:8 
+Run yum install nginx -y
+RUN rm -rf /usr/share/nginx/html/index.html
+ONBUILD ADD index.html /usr/share/nginx/html/index.html 
+CMD ["nginx", "-g", "daemon off;"] 
