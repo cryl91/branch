@@ -10,4 +10,3 @@ RUN echo "Hi Docker" > /tmp/hello.txt
 
 #Sets the current working directory to /tmp. This is similar to cd tmp/
 WORKDIR /tmp
-
