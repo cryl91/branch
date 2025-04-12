@@ -14,3 +14,7 @@ WORKDIR /tmp
 ARG course=abc
 RUN echo "The course is ${course} " >> /tmp/hello.txt
  
+#To use arg varaible in run time, use env variable
+
+ENV course=${course}
+RUN echo "The course is ${course} " >> /tmp/hello.txt
