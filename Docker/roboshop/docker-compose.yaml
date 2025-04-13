@@ -15,9 +15,8 @@ services:
     ports: 
       - "80:80"
     volumes:
-      - source: web 
-      - target: /usr/share/nginx/html/
-    # environment:
+      - web:/usr/share/nginx/html/ 
+     # environment:
     #   - user=roboshop
     #   - pass=roboshop123
     # depends_on:
