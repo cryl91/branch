@@ -1,4 +1,6 @@
 #Command to run = docker-compose up -d
+#Use the host’s IP address, not the container’s IP, even on a custom bridge. 
+#You’re mapping container’s port to the host with -p, and that’s what makes it reachable via browser.
 networks:
   roboshop:
     driver: bridge
@@ -9,4 +11,10 @@ services:
     networks: 
       - roboshop
     ports: 
-      - "80:80" 
+      - "80:80"
+    # environment:
+    #   - user=roboshop
+    #   - pass=roboshop123
+    # depends_on:
+    #   - catalogue
+    #   - user 
