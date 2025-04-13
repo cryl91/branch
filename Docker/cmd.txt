@@ -1,3 +1,6 @@
+Docker build = docker build -t web:1 .
+Docker run = docker run -d -p 80:80 <image-id>
+Docker exec = docker exec -it <container id> bash
 Docker container delete = docker rm -f $(docker ps -a -q)
 Docker Images delete = docker rmi -f $(docker images -a -q)
 Docker network = DOcker network create <name>

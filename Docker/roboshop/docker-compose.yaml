@@ -16,7 +16,7 @@ services:
       - "80:80"
     volumes:
       - source: web 
-      - target: /usr/share/nginx/html
+      - target: /usr/share/nginx/html/
     # environment:
     #   - user=roboshop
     #   - pass=roboshop123
