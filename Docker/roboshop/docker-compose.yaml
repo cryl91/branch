@@ -16,7 +16,13 @@ services:
       - "80:80"
     volumes:
       - web:/usr/share/nginx/html/ 
-     # environment:
+    #Long syntax of volume declarationSS
+    # volumes:
+    #   - type: volume
+    #     source: web
+    #     target: /usr/share/nginx/html/
+    
+    #  # environment:
     #   - user=roboshop
     #   - pass=roboshop123
     # depends_on:
