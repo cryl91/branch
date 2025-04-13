@@ -4,6 +4,8 @@
 networks:
   roboshop:
     driver: bridge
+volumes:
+  web:
 services: 
   web:
     image: web:1
@@ -12,6 +14,9 @@ services:
       - roboshop
     ports: 
       - "80:80"
+    volumes:
+      - source: web 
+      - target: /usr/share/nginx/html
     # environment:
     #   - user=roboshop
     #   - pass=roboshop123

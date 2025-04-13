@@ -8,8 +8,8 @@ LABEL course=devops \
 EXPOSE 80/tcp
 
 #Remove index.html to copy your index.html to the file
-# RUN rm -rf /usr/share/nginx/html/index.html
-# COPY index.html /usr/share/nginx/html/index.html
+RUN rm -rf /usr/share/nginx/html/index.html
+COPY index.html /usr/share/nginx/html/index.html
 
 ENV Name=shiva \
     age=25 \
