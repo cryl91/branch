@@ -7,7 +7,7 @@ module "minikube" {
   # ~ -> means home directory(/c/Users/user). So you should have terraform.pub in your home directory
   ssh_public_key = "~/terraform.pub"
   aws_subnet_id = "subnet-0681e1e3a08354aa7"
-  hosted_zone = "example.com"
+  hosted_zone = "cryl91.com"
   # hosted_zone = "jointdevops.online"
   hosted_zone_private = false
 
