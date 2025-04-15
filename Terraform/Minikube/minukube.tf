@@ -1,14 +1,13 @@
 module "minikube" {
   source = "github.com/scholzj/terraform-aws-minikube"
 
-  aws_region    = "us-east-1"
+  aws_region    = "us-east-1b"
   cluster_name  = "roboshop"
   aws_instance_type = "t2.medium"
   # ~ -> means home directory(/c/Users/user). Soyou should have terraform.pub in your home directory
   ssh_public_key = "~/terraform.pub"
-  aws_subnet_id = "subnet-8a3517f8"
-  ami_image_id = "ami-b81dbfc5"
-  hosted_zone = "my-domain.com"
+  aws_subnet_id = "subnet-0681e1e3a08354aa7"
+  # hosted_zone = "my-domain.com"
   hosted_zone_private = false
 
   tags = {
