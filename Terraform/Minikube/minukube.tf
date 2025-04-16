@@ -2,7 +2,7 @@ module "minikube" {
   source = "github.com/scholzj/terraform-aws-minikube"
 
   aws_region    = "us-east-1"
-  cluster_name  = "roboshop"
+  cluster_name  = "minikube"
   aws_instance_type = "t2.medium"
   # ~ -> means home directory(/c/Users/user). So you should have terraform.pub in your home directory
   ssh_public_key = "~/terraform.pub"
