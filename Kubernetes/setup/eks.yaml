@@ -5,6 +5,7 @@ metadata:
   name: eks-cluster
   region: us-east-1
 
+#Name,Instancetype,AZ,Desired Capacity
 managedNodeGroups: # this is also completely managed by AWS
   - name: spot
     instanceType: t2.medium
