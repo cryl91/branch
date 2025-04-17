@@ -9,6 +9,5 @@ spec:
     image: nginx:1.14.2
   - name: sidecar
     image: almalinux:8
-    command: "sleep 200" #Because almalinux exits. So we need to keep it in sleep to see it.
+    command: ["sleep", "200"] #Because almalinux exits. So we need to keep it in sleep to see it.
 
-    
