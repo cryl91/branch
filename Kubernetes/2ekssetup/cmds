@@ -6,3 +6,6 @@ To get info = kubectl config get-contexts
 Create = kubectl create -f namespace.yaml
 apply(update when resource exists) = kubectl apply -f namespace.yaml 
 delete = kubectl delete -f namespace.yaml
+
+Get pods within namespace = kubectl get pods -n roboshop
+Enter pods = kubectl exec -it nginx -- bash
