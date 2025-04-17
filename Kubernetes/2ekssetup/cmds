@@ -11,3 +11,7 @@ Get pods within namespace = kubectl get pods -n roboshop
 Enter pod = kubectl exec -it nginx -- bash
 Enter pod of a particular container = Enter pod of a particular container = kubectl exec -it multicontainer -c sidecar -n roboshop -- bash
  
+
+
+Password Encode =  echo "H1" | base64
+Password Decode =  echo "SDEK" | base64 --decode
