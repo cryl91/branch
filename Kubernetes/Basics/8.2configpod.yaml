@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: envconfig
+spec:
+  containers:
+  - name: nginx
+    image: nginx:1.14.2
+    env:
+    - name: course
+      valueFrom: 
+        configMapKeyRef:
+          name: course-config
+          value: course
+    - name: Person
+      valueFrom: 
+        configMapKeyRef:
+          name: duration-config
+          value: duration
+    - name: Trainer
+      valueFrom: 
+        configMapKeyRef:
+          name: trainer-config
+          value: trainer
