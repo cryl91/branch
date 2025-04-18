@@ -1,0 +1,31 @@
+#Login in to one more container and curl ip/servicename. To get ip = kubectl get services 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+  labels: 
+    env: dev
+    app: frontend
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    imagePullPolicy: Always #To always pull the latest image
+    ports:
+    - containerPort: 80
+      name: nginx-port
+---
+apiVersion: v1
+kind: Service
+metadata: 
+  name: nginx-service
+spec:
+  type: LoadBalancer #The only difference from clusterip
+  selector: #The service attaches to the pod by matching with the labels
+    env: dev
+    app: frontend
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80 #This port number belongs to service
+    targetPort: nginx-port #This port number belongs to container
