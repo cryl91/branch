@@ -1,7 +1,8 @@
 #Deployment code is put here.apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
 metadata:
   name: Catalogue
+  namespace: roboshop
   labels: #These labels are deployment set labels.Every k8s resources have labels
     app: catalogue
     tier: app
@@ -20,13 +21,17 @@ spec:
     spec:
       containers: 
       - name: catalogue
-        image: catalogue:1.0
+        image: joindevops/catalogue:1.0
+        envFrom:
+        - configMapRef:
+            name: configmap
 ---
 #Setting up a clusterip to connect catalogue to web
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: catalogue
+  namespace: roboshop
 spec:
   selector:
     env: dev
@@ -34,5 +39,15 @@ spec:
   ports:
   - name: name-of-service-port
     protocol: TCP
-    port: 80 #This port number belongs to service
-    targetPort: nginx-port #This port number belongs to container
+    port: 8080 #This port number belongs to service
+    targetPort: 8080 #This port number belongs to container
+---
+#Create a configmap to pass variables
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: configmap
+  namespace: roboshop
+data:
+  MONGO: "true" #keep true in double quotes 
+  MONGO_URL: "mongodb://mongodb:27017/catalogue"
