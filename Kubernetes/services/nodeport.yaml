@@ -17,10 +17,11 @@ spec:
 ---
 apiVersion: v1
 kind: Service
-metadata:
+metadata: 
   name: nginx-service
 spec:
-  selector:
+  type: NodePort #The only difference from clusterip
+  selector: #The service attaches to the pod by matching with the labels
     env: dev
     app: frontend
   ports:

@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: nginx
-    image: nginx:1.14.2
+    image: nginx
     env:
     - name: demo
       value: "Hello from the env"

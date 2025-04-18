@@ -6,7 +6,7 @@ metadata:
 spec:
   containers:
   - name: nginx
-    image: nginx:1.14.2
+    image: nginx
   - name: sidecar
     image: almalinux:8
     command: ["sleep", "200"] #Because almalinux exits. So we need to keep it in sleep to see it.
