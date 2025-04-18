@@ -1,25 +1,23 @@
-apiVersion: apps/v1
+#Deployment code is put here.apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: frontend
+  name: Catalogue
   labels: #These labels are deployment set labels.Every k8s resources have labels
-    app: guestbook
-    tier: frontend
+    app: catalogue
+    tier: app
 spec:
   # modify replicas according to your case
-  replicas: 3
+  replicas: 2
   selector: #selector should match with template. The selector should match with pod labels
     matchLabels:
-      tier: frontend
-      env: prod
+      app: catalogue
+      tier: app
   template: #Template is pod labels   
     metadata:
       labels:
-        tier: frontend
-        env: prod
+        app: catalogue
+        tier: app
     spec:
       containers: 
-      - name: nginx
-        image: nginx:latest
-        ports: 
-        - containerPort: 80
+      - name: catalogue
+        image: catalogue:1.0
