@@ -12,7 +12,7 @@ managedNodeGroups: # this is also completely managed by AWS
     # your K8 node can be anytime taken back by AWS
     spot: true
     availabilityZones: # ebs static provisioning
-    - us-east-1c
+    - us-east-1f
     desiredCapacity: 2
     ssh:
       publicKeyName: terraform # replace this with your keypair exists in AWS.
