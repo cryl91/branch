@@ -21,3 +21,18 @@ spec:
       containers: 
       - name: catalogue
         image: catalogue:1.0
+---
+#Setting up a clusterip to connect catalogue to web
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    env: dev
+    app: frontend
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80 #This port number belongs to service
+    targetPort: nginx-port #This port number belongs to container
