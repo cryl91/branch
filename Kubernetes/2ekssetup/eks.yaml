@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: eks-cluster
+  name: ekscluster
   region: us-east-1
 
 #Name,Instancetype,AZ,Desired Capacity

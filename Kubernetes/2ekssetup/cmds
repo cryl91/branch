@@ -1,6 +1,6 @@
 
 Creating eks cluster = eksctl create cluster --config-file=eks.yaml
-Deleting eks cluster = eksctl delete cluster --name eks-cluster
+Deleting eks cluster = eksctl delete cluster --name ekscluster
 To get info = kubectl config get-contexts
 
 Create = kubectl create -f namespace.yaml
