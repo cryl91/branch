@@ -8,7 +8,7 @@ metadata:
 #Name,Instancetype,AZ,Desired Capacity
 managedNodeGroups: # this is also completely managed by AWS
   - name: spot
-    instanceType: t2.micro
+    instanceType: t2.medium
     # your K8 node can be anytime taken back by AWS
     spot: true
     availabilityZones: # ebs static provisioning
