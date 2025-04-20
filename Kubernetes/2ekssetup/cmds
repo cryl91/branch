@@ -17,7 +17,7 @@ Password Encode =  echo "H1" | base64
 Password Decode =  echo "SDEK" | base64 --decode
 
 alias ka "kubectl apply -f manifest.yaml" -> from next time just type ka to apply
-Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.42"
+Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.7"
 
 --Add the AWS EBS CSI Helm repo: Install with Helm
 1. helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
