@@ -1,0 +1,59 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer
+parameters:
+  csi.storage.k8s.io/fstype: xfs
+  type: io1
+  iopsPerGB: "50"
+  encrypted: "true"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-dynamic-pvc
+spec:
+  selector:
+    matchLabels: 
+      volume-type: pv-static 
+  storageClassName: "ebs-sc"
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 3Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels: #These labels are deployment set labels.Every k8s resources have labels
+    app: guestbook
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector: #selector should match with template. The selector should match with pod labels
+    matchLabels:
+      tier: frontend
+      env: prod
+  template: #Template is pod labels   
+    metadata:
+      labels:
+        tier: frontend
+        env: prod
+    spec:
+      containers: 
+      - name: nginx
+        image: nginx:latest
+        ports: 
+        - containerPort: 80
+        volumeMounts:
+        - mountPath: "/usr/share/nginx/html"
+          name: nginx-storage
+      volumes:
+      - name: nginx-storage
+        persistentVolumeClaim:    
+          claimName: ebs-dynamic-pvc
