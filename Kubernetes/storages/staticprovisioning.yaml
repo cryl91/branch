@@ -38,7 +38,7 @@ metadata:
     tier: frontend
 spec:
   # modify replicas according to your case
-  replicas: 10
+  replicas: 3
   selector: #selector should match with template. The selector should match with pod labels
     matchLabels:
       tier: frontend
