@@ -18,3 +18,15 @@ Password Decode =  echo "SDEK" | base64 --decode
 
 alias ka "kubectl apply -f manifest.yaml" -> from next time just type ka to apply
 Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.42"
+
+--Add the AWS EBS CSI Helm repo: Install with Helm
+1. helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
+   helm repo update
+2. helm upgrade --install aws-ebs-csi-driver \
+                  aws-ebs-csi-driver/aws-ebs-csi-driver \
+                  --namespace kube-system \
+                  --set enableVolumeScheduling=true \
+                  --set enableVolumeResizing=true \
+                  --set enableVolumeSnapshot=true
+3. After installation, check that the CSI pods are running:
+   kubectl get pods -n kube-system | grep ebs
