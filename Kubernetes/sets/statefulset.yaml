@@ -33,3 +33,17 @@ spec:
       resources:
         requests:
           storage: 4Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-stateless #To make stateful set as headless service
+spec:
+  clusterIP: None #To make it a headless service give this
+  selector:
+    app: nginx-stateful
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80 #This port number belongs to service
+    targetPort: nginx-port #This port number belongs to container
