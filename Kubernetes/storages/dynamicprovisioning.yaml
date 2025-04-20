@@ -47,6 +47,7 @@ spec:
         image: nginx:latest
         ports: 
         - containerPort: 80
+          name: nginx-port
         volumeMounts:
         - mountPath: "/usr/share/nginx/html"
           name: nginx-storage
