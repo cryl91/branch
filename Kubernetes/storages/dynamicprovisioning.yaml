@@ -55,18 +55,18 @@ spec:
       - name: nginx-storage
         persistentVolumeClaim:    
           claimName: ebs-dynamic-pvc
----
-apiVersion: v1
-kind: Service
-metadata: 
-  name: nginx-service
-spec:
-  type: LoadBalancer #The only difference from clusterip
-  selector: #The service attaches to the pod by matching with the labels
-    tier: frontend
-    env: prod
-  ports:
-  - name: name-of-service-port
-    protocol: TCP
-    port: 80 #This port number belongs to service
-    targetPort: nginx-port #This port number belongs to container
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata: 
+#   name: nginx-service
+# spec:
+#   type: LoadBalancer #The only difference from clusterip
+#   selector: #The service attaches to the pod by matching with the labels
+#     tier: frontend
+#     env: prod
+#   ports:
+#   - name: name-of-service-port
+#     protocol: TCP
+#     port: 80 #This port number belongs to service
+#     targetPort: nginx-port #This port number belongs to container
