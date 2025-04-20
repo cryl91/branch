@@ -13,7 +13,7 @@ spec:
     storage: 20Gi
 ---
 apiVersion: v1
-kind: PersistentVolume
+kind: PersistentVolumeClaim
 metadata:
   name: ebs-static-pvc
 spec:
