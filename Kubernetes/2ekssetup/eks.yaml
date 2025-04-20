@@ -2,7 +2,7 @@ apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
 metadata:
-  name: ekscluster
+  name: eks-cluster
   region: us-east-1
 
 #Name,Instancetype,AZ,Desired Capacity
@@ -11,9 +11,9 @@ managedNodeGroups: # this is also completely managed by AWS
     instanceType: t2.medium
     # your K8 node can be anytime taken back by AWS
     spot: true
-    availabilityZones: # ebs static provisioning
-    - us-east-1a
-    - us-east-1c
+    # availabilityZones: # ebs static provisioning
+    # - us-east-1a
+    # - us-east-1c
     desiredCapacity: 2
     ssh:
       publicKeyName: terraform # replace this with your keypair exists in AWS.

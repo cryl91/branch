@@ -1,7 +1,9 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: ebs-static  
+  name: ebs-static
+  labels:
+    volume-type: pv-static #This matches with the selector in pvc
 spec:
   storageClassName: "" #Used in Dynamic Provisioning
   accessModes:
@@ -17,6 +19,9 @@ kind: PersistentVolumeClaim
 metadata:
   name: ebs-static-pvc
 spec:
+  selector:
+    matchLabels: 
+      volume-type: pv-static 
   storageClassName: ""
   accessModes:
     - ReadWriteOnce
