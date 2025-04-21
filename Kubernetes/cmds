@@ -30,3 +30,8 @@ Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-d
                   --set enableVolumeSnapshot=true
 3. After installation, check that the CSI pods are running:
    kubectl get pods -n kube-system | grep ebs
+
+Helm = 
+1. helm install <name of chart> . 
+--nginx — This is the release name. It's the name you are giving to this particular deployment of the Helm chart
+2. helm upgrade <name> .

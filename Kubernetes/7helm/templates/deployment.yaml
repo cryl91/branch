@@ -7,7 +7,7 @@ metadata:
     tier: web
 spec:
   # modify replicas according to your case
-  replicas: 3
+  replicas: "{{ .Values.deployment.replicas}}"
   selector: #selector should match with template. The selector should match with pod labels
     matchLabels:
       tier: nginx
@@ -20,6 +20,6 @@ spec:
     spec:
       containers: 
       - name: nginx
-        image: nginx:latest
+        image: "nginx:{{ .Values.deployment.imageVersion }}"
         ports: 
         - containerPort: 80
