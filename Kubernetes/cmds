@@ -35,4 +35,5 @@ Helm =
 1. helm install <name of chart> . ++++ nginx — This is the release name. It's the name you are giving to this particular deployment of the Helm chart
 2. To delete = helm delete <name>
 3. To update = helm upgrade <name> .
-4. To Revert to Previous version = helm history <name>
+4. To see history = helm history <name>
+4. To Revert to Previous version = helm rollback <name>

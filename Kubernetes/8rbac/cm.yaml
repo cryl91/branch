@@ -1,0 +1,21 @@
+#Edited auth-configmap by adding mapUser ie adding ramesh and informing kubernetes regarding user and role binding
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::717279696402:role/eksctl-eks-cluster-nodegroup-spot-NodeInstanceRole-PFsC5z9RWwm4
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - groups:
+       - roboshop-admin
+        userarn: arn:aws:iam::717279696402:user/cyril
+        username: ramesh
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-04-21T17:12:18Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "1308"
+  uid: 76bfa94f-03ac-4168-93a1-0c8ab523eeeb

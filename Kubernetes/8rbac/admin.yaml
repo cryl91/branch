@@ -1,0 +1,83 @@
+#Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: roboshop
+---
+#Create Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: roboshop
+  name: roboshop-admin #Since he is admin, he has access to eveyrthing
+rules:
+- apiGroups: ["*"] # "" indicates the core API group
+  resources: ["*"]
+  verbs: ["*"] #Indicates actions on resources like CRUD
+---
+#Create Cluster Role
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  # "namespace" omitted since ClusterRoles are not namespaced
+  name: roboshop-cluster-reader
+rules:
+- apiGroups: ["v1","app/v1",""] #This the api-resources. To see it "Kubectl api-resources"
+  resources: ["secrets","nodes","namespaces","persistentvolumes"]
+  verbs: ["get", "watch", "list"] #This is by default completely watch list. It wont give any create,update,delete access
+---
+#Role Binding to a user
+apiVersion: rbac.authorization.k8s.io/v1
+# This role binding allows "jane" to read pods in the "default" namespace.
+# You need to already have a Role named "pod-reader" in that namespace.
+kind: RoleBinding
+metadata:
+  name: read-pods
+  namespace: roboshop
+subjects:
+# You can specify more than one "subject"
+- kind: User
+  name: ramesh # "name" is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  # "roleRef" specifies the binding to a Role / ClusterRole
+  kind: Role #this must be Role or ClusterRole
+  name: roboshop-admin # this must match the name of the Role or ClusterRole you wish to bind to
+  apiGroup: rbac.authorization.k8s.io
+---
+#Cluster Rolebinding
+apiVersion: rbac.authorization.k8s.io/v1
+# This cluster role binding allows anyone in the "manager" group to read secrets in any namespace.
+kind: ClusterRoleBinding
+metadata:
+  name: roboshop-cluster-reader
+subjects:
+- kind: User
+  name: ramesh # Name is case sensitive
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: roboshop-cluster-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+#Edited auth-configmap by adding mapUser ie adding ramesh and informing kubernetes regarding user and role binding
+apiVersion: v1
+data:
+  mapRoles: |
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::717279696402:role/eksctl-eks-cluster-nodegroup-spot-NodeInstanceRole-PFsC5z9RWwm4
+      username: system:node:{{EC2PrivateDNSName}}
+  mapUsers: |
+    - groups:
+       - roboshop-admin
+        userarn: arn:aws:iam::717279696402:user/cyril
+        username: ramesh
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2025-04-21T17:12:18Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "1308"
+  uid: 76bfa94f-03ac-4168-93a1-0c8ab523eeeb
