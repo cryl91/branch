@@ -32,6 +32,7 @@ Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-d
    kubectl get pods -n kube-system | grep ebs
 
 Helm = 
-1. helm install <name of chart> . 
---nginx — This is the release name. It's the name you are giving to this particular deployment of the Helm chart
-2. helm upgrade <name> .
+1. helm install <name of chart> . ++++ nginx — This is the release name. It's the name you are giving to this particular deployment of the Helm chart
+2. To delete = helm delete <name>
+3. To update = helm upgrade <name> .
+4. To Revert to Previous version = helm history <name>

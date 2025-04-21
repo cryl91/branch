@@ -7,7 +7,7 @@ metadata:
     tier: web
 spec:
   # modify replicas according to your case
-  replicas: {{ .Values.deployment.replicasCount }}
+  replicas: {{ .Values.deployment.replicasCount }} #Dont give double quotes for numbers. Use it only for alphabets
   selector: #selector should match with template. The selector should match with pod labels
     matchLabels:
       tier: nginx

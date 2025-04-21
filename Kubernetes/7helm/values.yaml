@@ -1,5 +1,5 @@
 deployment: 
-  imageVersion: stable-perl
-  replicasCount: 2
+  imageVersion: stable-perl #Or you can use latest also
+  replicasCount: 3
 service:
   port: 80
