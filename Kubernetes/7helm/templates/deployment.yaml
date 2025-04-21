@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels: #These labels are deployment set labels.Every k8s resources have labels
+    app: nginx
+    tier: web
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector: #selector should match with template. The selector should match with pod labels
+    matchLabels:
+      tier: nginx
+      env: web
+  template: #Template is pod labels   
+    metadata:
+      labels:
+        tier: nginx
+        env: web
+    spec:
+      containers: 
+      - name: nginx
+        image: nginx:latest
+        ports: 
+        - containerPort: 80
