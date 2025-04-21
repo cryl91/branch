@@ -72,7 +72,7 @@ data:
   mapUsers: |
     - groups:
        - roboshop-admin
-        userarn: arn:aws:iam::717279696402:user/cyril
+        userarn: arn:aws:iam::717279696402:user/ramesh
         username: ramesh
 kind: ConfigMap
 metadata:
