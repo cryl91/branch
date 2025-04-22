@@ -43,4 +43,3 @@
 2. check it using = ab -V
 3. How to use it = ab -n 10000 -c 100 https://www.google.com/
 
-
