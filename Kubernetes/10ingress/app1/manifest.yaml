@@ -43,7 +43,7 @@ metadata:
         alb.ingress.kubernetes.io/scheme: internet-facing
         alb.ingress.kubernetes.io/target-type: ip
         alb.ingress.kubernetes.io/tags: Environment=dev,Project=roboshop
-        alb.ingress.kubernetes.io/group.name: joindevops
+        alb.ingress.kubernetes.io/group.name: joindevops #If you give the group name then all the applications will attach to the same load balancer. If not it will create multiple load balancers 
 spec:
   ingressClassName: alb
   rules:

@@ -24,7 +24,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: app2
 spec:
   selector:
     app: app2
@@ -34,29 +34,26 @@ spec:
     port: 80 #This port number belongs to service
     targetPort: 80 #This port number belongs to container
 ---
+#Hostpath based ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-wildcard-host
+    name: app2
+    annotations:
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        alb.ingress.kubernetes.io/target-type: ip
+        alb.ingress.kubernetes.io/tags: Environment=dev,Project=roboshop
+        alb.ingress.kubernetes.io/group.name: joindevops
 spec:
+  ingressClassName: alb
   rules:
-  - host: "foo.bar.com"
+  - host: "app2.joindevops.online"
     http:
       paths:
-      - pathType: Prefix
-        path: "/bar"
+      - path: /  #path: / means: Match any request that starts with /, like: http://app2.joindevops.online/ or http://app2.joindevops.online/index.html
+        pathType: Prefix
         backend:
           service:
-            name: service1
-            port:
-              number: 80
-  - host: "*.foo.com"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/foo"
-        backend:
-          service:
-            name: service2
+            name: app2
             port:
               number: 80
