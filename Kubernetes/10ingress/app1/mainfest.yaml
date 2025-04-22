@@ -34,29 +34,27 @@ spec:
     port: 80 #This port number belongs to service
     targetPort: 80 #This port number belongs to container
 ---
+#Hostpath based ingress
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-wildcard-host
+    name: app1
+    annotations:
+        alb.ingress.kubernetes.io/scheme: internet-facing
+        alb.ingress.kubernetes.io/target-type: ip
+        alb.ingress.kubernetes.io/tags: Environment=dev,Project=roboshop
+        alb.ingress.kubernetes.io/group.name: joindevops
 spec:
+  ingressClassName: alb
   rules:
-  - host: "foo.bar.com"
+  - host: "app1.joindevops.online "
     http:
       paths:
-      - pathType: Prefix
-        path: "/bar"
+      - path: /
+        pathType: Prefix
         backend:
           service:
-            name: service1
+            name: app1
             port:
               number: 80
-  - host: "*.foo.com"
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/foo"
-        backend:
-          service:
-            name: service2
-            port:
-              number: 80
+ 
