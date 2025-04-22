@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app1
+  labels: #These labels are deployment set labels.Every k8s resources have labels
+    app: app1
+spec:
+  # modify replicas according to your case
+  replicas: 2
+  selector: #selector should match with template. The selector should match with pod labels
+    matchLabels:
+      app: app1
+  template: #Template is pod labels   
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers: 
+      - name: app1
+        image: cryl91/app1
+        ports: 
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: app1
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80 #This port number belongs to service
+    targetPort: 80 #This port number belongs to container
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-wildcard-host
+spec:
+  rules:
+  - host: "foo.bar.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/bar"
+        backend:
+          service:
+            name: service1
+            port:
+              number: 80
+  - host: "*.foo.com"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/foo"
+        backend:
+          service:
+            name: service2
+            port:
+              number: 80

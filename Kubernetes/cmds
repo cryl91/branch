@@ -1,23 +1,23 @@
+--commands = 
+1.Creating eks cluster = eksctl create cluster --config-file=eks.yaml
+2.Deleting eks cluster = eksctl delete cluster --name ekscluster
+3.To get info = kubectl config get-contexts
 
-Creating eks cluster = eksctl create cluster --config-file=eks.yaml
-Deleting eks cluster = eksctl delete cluster --name ekscluster
-To get info = kubectl config get-contexts
+4.Create = kubectl create -f namespace.yaml
+5.apply(update when resource exists) = kubectl apply -f namespace.yaml 
+6.delete = kubectl delete -f namespace.yaml
 
-Create = kubectl create -f namespace.yaml
-apply(update when resource exists) = kubectl apply -f namespace.yaml 
-delete = kubectl delete -f namespace.yaml
+7.Get pods within namespace = kubectl get pods -n roboshop
+8.Enter pod = kubectl exec -it nginx -- bash
+9.Enter pod of a particular container = kubectl exec -it multicontainer -c sidecar -n roboshop -- bash
+10.To enter into a namespace = Kubens roboshop
+11.To delete pod = kubectl delete pod <pod-name> 
 
-Get pods within namespace = kubectl get pods -n roboshop
-Enter pod = kubectl exec -it nginx -- bash
-Enter pod of a particular container = kubectl exec -it multicontainer -c sidecar -n roboshop -- bash
-To enter into a namespace = Kubens roboshop
-To delete pod = kubectl delete pod <pod-name> 
+12.Password Encode =  echo "H1" | base64
+13.Password Decode =  echo "SDEK" | base64 --decode
 
-Password Encode =  echo "H1" | base64
-Password Decode =  echo "SDEK" | base64 --decode
-
-alias ka "kubectl apply -f manifest.yaml" -> from next time just type ka to apply
-Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.7"
+14.alias ka "kubectl apply -f manifest.yaml" -> from next time just type ka to apply
+15.Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=release-1.7"
 
 --Add the AWS EBS CSI Helm repo: Install with Helm
 1. helm repo add aws-ebs-csi-driver https://kubernetes-sigs.github.io/aws-ebs-csi-driver
@@ -31,7 +31,7 @@ Install EBS Drivers = kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-d
 3. After installation, check that the CSI pods are running:
    kubectl get pods -n kube-system | grep ebs
 
-Helm = 
+--Helm = 
 1. helm install <name of chart> . ++++ nginx — This is the release name. It's the name you are giving to this particular deployment of the Helm chart
 2. To delete = helm delete <name>
 3. To update = helm upgrade <name> .
@@ -41,4 +41,6 @@ Helm =
 --To install apache benchmark = 
 1. Install it = sudo yum install -y httpd-tools
 2. check it using = ab -V
-3. How to use it = ab -n 10000 -c 100 <http_url>
+3. How to use it = ab -n 10000 -c 100 https://www.google.com/
+
+
