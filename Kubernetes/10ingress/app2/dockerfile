@@ -1,0 +1,5 @@
+FROM almalinux:8 
+Run yum install nginx -y
+RUN rm -rf /usr/share/nginx/html/index.html
+RUn echo "Hi this is from app2" > /usr/share/nginx/html/index.html 
+CMD ["nginx", "-g", "daemon off;"]
