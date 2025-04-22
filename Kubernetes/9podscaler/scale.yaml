@@ -1,0 +1,45 @@
+#Install a metric server to calculate the cpu or memory usage(kubectl top pods) = kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx
+  labels: #These labels are deployment set labels.Every k8s resources have labels
+    app: guestbook
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector: #selector should match with template. The selector should match with pod labels
+    matchLabels:
+      tier: nginx
+      env: prod
+  template: #Template is pod labels   
+    metadata:
+      labels:
+        tier: nginx
+        env: prod
+    spec:
+      containers: 
+      - name: nginx
+        image: nginx:latest
+        ports: 
+        - containerPort: 80
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx
+  minReplicas: 1
+  maxReplicas: 5 
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50

@@ -37,3 +37,8 @@ Helm =
 3. To update = helm upgrade <name> .
 4. To see history = helm history <name>
 4. To Revert to Previous version = helm rollback <name>
+
+--To install apache benchmark = 
+1. Install it = sudo yum install -y httpd-tools
+2. check it using = ab -V
+3. How to use it = ab -n 10000 -c 100 <http_url>
