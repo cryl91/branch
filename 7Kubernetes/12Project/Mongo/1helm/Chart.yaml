@@ -1,0 +1,8 @@
+#The chart.yaml is the metadata of our application. Mandatory = apiVersion+name+Version
+apiVersion: v2
+name: mongodb #The name of the chart
+version: 0.0.1 #This is the chart version
+description: This is helm chart of mongodb
+appVersion: "1.0.0" #This is the application version 
+ 
+ 
