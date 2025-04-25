@@ -34,6 +34,7 @@ spec:
     port: 80 #This port number belongs to service
     targetPort: 80 #This port number belongs to container
 ---
+#The below is a ingress rule
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
