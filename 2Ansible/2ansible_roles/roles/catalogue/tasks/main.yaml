@@ -1,4 +1,8 @@
 #Import common tasks from common folder
+#Deployment = 
+#1. Create User+ Create mkdir
+#2. Download Artifact+ Npm Install
+#3. Copy Service file+ Load Data
 - name: Install nodejs
   ansible.builtin.import_role:
     name: common

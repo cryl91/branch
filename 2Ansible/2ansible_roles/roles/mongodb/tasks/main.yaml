@@ -2,7 +2,7 @@
   ansible.builtin.copy:
     src: mongodb.repo
     dest: /etc/yum.repos.d/mongo.repo
-- name: nginx
+- name: install
   ansible.builtin.yum:
     name: mongodb
     state: installed
