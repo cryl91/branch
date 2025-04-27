@@ -23,7 +23,7 @@
   #  vars:
   #  name: abc  
   #  ansible.builtin.debug:
-  #    msg: "Hello {{name}} 
+  #    msg: "Hello {{name}}"
   #  when: name == "abc"
    
   
