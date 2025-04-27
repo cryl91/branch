@@ -2,6 +2,7 @@ pipeline {
     agent any //To run on different agent = agent { node { label 'agent1' } }
     environment{ //Here if you create any variable you will have global issues. Since its environment no need of def.
         packageversion = ''
+        region = "us-east-1a"
     }
     parameters {
         string(name: 'version', defaultValue: '1.0.0', description: 'Which version to deploy?')
@@ -91,22 +92,41 @@ pipeline {
         stage('Docker Push') { 
             steps {
                 script{
+                      withCredentials([usernamePassword(credentialsId: 'docker-auth', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]){ 
                     sh '''
+                    docker login -u $USERNAME -p $PASSWORD
                     cd 12Project/Mongo/2CIPipeline                    
                     docker push cryl91/mongodb
                     '''
-                }
+                      }
+                      }
                 
                 }
             }
+//If you want to push it to ECR. And in Manifest.yaml give this image id of ECR(ie URI ID). Also the ec2 should have ECR access. 
+        stage('ECR Push') { 
+            steps {
+                script{
+                    sh """
+                    aws ecr get-login-password --region $region | docker login --username AWS --password-stdin 717279696402.dkr.ecr.us-east-1.amazonaws.com
+                    docker tag cryl91/mongodb:latest 717279696402.dkr.ecr.us-east-1.amazonaws.com/mongodb:latest
+                    docker push 717279696402.dkr.ecr.us-east-1.amazonaws.com/mongodb:latest
+                    """
+
+                      }
+                
+                }
+            }
+
         stage('EKS Deploy') { 
             steps {
                 script{
                     sh '''
-                    cd 1helm
+                    cd .. /1helm
                     sed -i 's/IMAGE_VERSION/$packageversion/g' values.yaml
                     helm install ${component} . 
                     '''
+//Or instead of helm install ${component} you can use kubectl apply -f manifest.yaml
                    }
                 
                 }
