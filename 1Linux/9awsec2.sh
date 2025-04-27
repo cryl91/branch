@@ -9,9 +9,9 @@ for i in ${names[@]}
 do
     if [ $i == "mongodb" ]
     then 
-    instancetype="t3.medium"
+    instancetype=t3.medium
     else
-    instancetype="t2.micro"
+    instancetype=t2.micro
     fi
 echo "creating $i"
 aws ec2 run-instances --image-id $imageid --count 1 --instance-type $instancetype 
