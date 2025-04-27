@@ -20,8 +20,8 @@ yum list installed $i &>> $file
 if [ $? -ne 0 ]
     then 
         echo "$i not installed,lets install it"
-        yum install $1 -y
-        validate $? $1
+        yum install $i -y
+        validate $? $i
     else
         echo "$i is already installed"
     fi
