@@ -1,7 +1,7 @@
 --For running function:
 1.To start console = terraform console
 2. join(" ", ["siva","kumar"])
-3.  max(10,20,30)
+3. max(10,20,30)
 4. min(10,20,30)
 5. To read file = 
         public_key = file("${path.module}/devops.pub")
