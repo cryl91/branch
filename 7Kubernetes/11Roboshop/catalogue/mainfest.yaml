@@ -34,8 +34,8 @@ metadata:
   namespace: roboshop
 spec:
   selector:
-    env: dev
-    app: frontend
+    app: catalogue
+    tier: app
   ports:
   - name: name-of-service-port
     protocol: TCP

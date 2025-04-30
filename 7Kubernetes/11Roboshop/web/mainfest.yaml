@@ -127,6 +127,9 @@ spec:
       containers: 
       - name: web
         image: joindevops/web:1.0
+        ports:
+        - containerPort: 80
+          name: nginx-port
         volumeMounts: #To mount the volume you created above
         - name: nginx-conf     
           mountPath: /etc/nginx/nginx.conf #This is the filename it will be mounted as inside the volume. ie  Static config volume which is used to  Mount a config file (filebeat.yml) into Filebeat’s container. And  Not meant to be shared — it’s mounted read-only by one container, for configuration only.
@@ -148,5 +151,5 @@ spec:
   - name: name-of-service-port
     protocol: TCP
     port: 80 #This port number belongs to service
-    targetPort: 80 #This port number belongs to container
+    targetPort: nginx-port #This port number belongs to container
 
