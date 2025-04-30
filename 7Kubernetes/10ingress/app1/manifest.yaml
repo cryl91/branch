@@ -34,7 +34,7 @@ spec:
     port: 80 #This port number belongs to service
     targetPort: 80 #This port number belongs to container
 ---
-#The below is a ingress rule
+#The below is a ingress rule. So the flow is Route53->App LB-> Ingress Rule-> Kubernetes Service->Pods
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -49,8 +49,8 @@ spec:
   rules:
   - host: "app1.joindevops.online"
     http:
-      paths:
-      - path: /
+      paths: 
+      - path: / #path: / means: Match any request that starts with /, like: http://app2.joindevops.online/ or http://app2.joindevops.online/index.html
         pathType: Prefix
         backend:
           service:
