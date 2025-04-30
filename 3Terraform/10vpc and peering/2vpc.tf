@@ -81,7 +81,7 @@ resource "aws_route_table_association" "assprivate" {
 }
 
 #Setting up a NAT Gateway for private subnet. 
-#It needs 2 things = Elastic IP+ Nat gateway provisioned in public subnet(ie bcase to get internet access)
+#It needs 2 things = Elastic IP+ Nat gateway provisioned in public subnet(ie bcase to get internet access)+ Adding to private route table
 
 #Creating Elastic IP
 resource "aws_eip" "eip" {
