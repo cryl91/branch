@@ -20,7 +20,7 @@ kind: Service
 metadata:
   name: nginx-service
 spec:
-  selector:
+  selector: #The service attaches to the pod by matching with the labels
     env: dev
     app: frontend
   ports:
