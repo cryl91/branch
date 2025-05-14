@@ -1,0 +1,20 @@
+In a Spring Boot application, the code is usually organized into a few key files and packages. 
+Here's a breakdown of the main code files you'll typically find (or write):
+
+src/
+ └── main/
+     ├── java/
+     │    └── com/example/demo/
+     │         ├── DemoApplication.java       ← 🟢 Main class (entry point)
+     │         ├── controller/
+     │         │     └── HelloController.java ← 🌐 API endpoints
+     │         ├── service/
+     │         │     └── HelloService.java    ← 🧠 Business logic
+     │         ├── repository/
+     │         │     └── UserRepository.java  ← 💾 Database access
+     │         └── model/
+     │               └── User.java            ← 📦 Domain model/entity
+     └── resources/
+          ├── application.properties         ← ⚙️ App configuration
+          ├── static/                        ← 🌐 Static files (HTML, CSS, JS)
+          └── templates/                     ← 🖼️ Thymeleaf or other view templates
