@@ -20,7 +20,8 @@ resource "aws_instance" "remote" {
     type     = "ssh"
     user     = "root"
     password = "devops123"
-    host     = self.public_ip
+  //private_key = file("Public-key")
+    host     = self.public_ip //Self meanas a shortcut to refer to the current resource (aws_instance.myinstance in this case). Here it Gets the public IP address assigned to the EC2 instance when it was created.
   }
 
   provisioner "remote-exec" {
