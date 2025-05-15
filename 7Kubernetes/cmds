@@ -2,7 +2,7 @@
 1.Creating eks cluster = eksctl create cluster --config-file=eks.yaml
 2.Deleting eks cluster = eksctl delete cluster --name eks-cluster
 3.Create Cluster CLI = eksctl create/delete cluster --name hub-cluster --region us-west-1 // By default, eksctl creates a single node group with 2 EC2 worker nodes of t3.medium and 20gb disk space
-3.To get info = kubectl config get-contexts
+3.To see all clusters = kubectl config get-contexts++++ To use one cluster = kubectl config use-contexts cluster-name
 
 4.Create = kubectl create -f namespace.yaml
 5.apply(update when resource exists) = kubectl apply -f namespace.yaml 
