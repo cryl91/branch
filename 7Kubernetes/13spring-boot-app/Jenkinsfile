@@ -1,7 +1,8 @@
 pipeline {
   agent { //"Run this pipeline inside a Docker container instead of directly on the Jenkins node."
     docker {
-      image 'abhishekf5/maven-abhishek-docker-agent:v1' //Use this Docker image from Docker Hub as the build environment. It probably contains Maven + Docker CLI pre-installed.
+      //image 'abhishekf5/maven-abhishek-docker-agent:v1' //Use this Docker image from Docker Hub as the build environment. It probably contains Maven + Docker CLI pre-installed.
+      image 'maven'
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // Run the container as root user, and mount the Docker socket so that Docker CLI commands inside the container can talk to the host’s Docker daemon.
     }
   }
@@ -47,8 +48,8 @@ pipeline {
     }
     stage('Update Deployment File') {
         environment {
-            GIT_REPO_NAME = "Jenkins-Zero-To-Hero"
-            GIT_USER_NAME = "iam-veeramalla"
+            GIT_REPO_NAME = "Linux"
+            GIT_USER_NAME = "cryl91"
         }
         steps {
             withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
