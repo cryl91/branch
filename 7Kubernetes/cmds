@@ -26,7 +26,7 @@
 2. helm upgrade --install aws-ebs-csi-driver \
                   aws-ebs-csi-driver/aws-ebs-csi-driver \
                   --namespace kube-system \
-                  --set enableVolumeScheduling=true \
+                  --set enableVolumeScheduling=true \   
                   --set enableVolumeResizing=true \
                   --set enableVolumeSnapshot=true
 3. After installation, check that the CSI pods are running:
