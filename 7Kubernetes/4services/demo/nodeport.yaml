@@ -28,4 +28,4 @@ spec:
   - name: name-of-service-port
     protocol: TCP
     port: 80 #This port number belongs to service
-    targetPort: nginx-port #This port number belongs to container
+    targetPort: nginx-port #This port number belongs to container 
