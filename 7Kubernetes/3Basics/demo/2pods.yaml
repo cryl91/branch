@@ -9,5 +9,5 @@ spec:
     image: nginx:1.14.2
     imagePullPolicy: Always #To always pull the latest image
     ports:
-    - containerPort: 8081
+    - containerPort: 80
 
