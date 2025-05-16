@@ -45,7 +45,7 @@
 2. check it using = ab -V
 3. How to use it = ab -n 10000 -c 100 https://www.google.com/
 
-eks cluster creation config file = 
+--eks cluster creation config file = 
 apiVersion: eksctl.io/v1alpha5
 kind: ClusterConfig
 
