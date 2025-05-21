@@ -8,4 +8,4 @@ Docker container delete = docker rm -f $(docker ps -a -q)
 Docker Images delete = docker rmi -f $(docker images -a -q)
 Docker network = DOcker network create <name>
 Docker volumes map(unnamed) = docker run -d -p 80:80 -v /home/ec2-user/nginx-data:/usr/share/nginx/html ee0e6cbb7162
-Docker volumes map(named) = docker volume craete <name>+ docker run -d -p 80:80 -v <volume-name>:/usr/share/nginx/html ee0e6cbb7162
+Docker volumes map(named) = docker volume create <name>+ docker run -d -p 80:80 -v <volume-name>:/usr/share/nginx/html ee0e6cbb7162

@@ -13,7 +13,8 @@
 
 var=$1
 
-while IFS= read -r line; do
+while IFS= read -r line; 
+do
     if [[ "$line" == *$var* ]]; then
         echo "Found it! --> $line"
         # Optionally exit the loop early
