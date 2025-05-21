@@ -1,4 +1,5 @@
 1. To get aaws-auth configmap infor = kubectl get configmap aws-auth -n kube-system -o yaml
+#-o yaml: you're asking for the raw YAML output instead of the default table view.
 
 apiVersion: v1
 data:
