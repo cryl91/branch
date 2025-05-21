@@ -1,3 +1,4 @@
+#A hostPath volume mounts a directory or file from the node's filesystem into the container.
 apiVersion: apps/v1
 kind: DaemonSet #Ensures one pod in every worker node
 metadata:
@@ -32,5 +33,5 @@ spec:
           mountPath: /var/log
       volumes:
       - name: varlog
-        hostPath: #Gives access to /var/log from the pod
+        hostPath: #Gives access to /var/log from the node
           path: /var/log 
