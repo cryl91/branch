@@ -43,3 +43,15 @@ spec:
       target:
         type: Utilization
         averageUtilization: 50
+
+# HPA adjusts the number of pods, not containers directly.
+# In your Deployment, each pod runs one container (nginx).
+# 📊 At Max Scaling:
+# MaxReplicas: 5 → This means up to 5 pods can be created.
+
+# Since each pod has 1 container, you'll have:
+# Max 5 pods × 1 container per pod = 5 containers total
+# The confusion might come from the replicas: 3 in the Deployment, but HPA overrides that based on CPU metrics.
+# It does not multiply with initial replicas — it controls the total pod count within the range [minReplicas, maxReplicas].
+# So the max number of nginx containers = 5, not 15.
+# Summary: Initial pods = 3 (from replicas). HPA dynamically scales between 1 and 5 pods. Each pod = 1 container → Max containers = 5
