@@ -118,7 +118,7 @@ spec:
     spec: 
       volumes: #To refer nginx.conf into this pod, for this you need to use volume and mount it
       - name: nginx-conf #Volume name
-        configMap:
+        configMap: # You are creating a volume that contains a single file named nginx-conf, and the content of that file will be pulled from the value of the nginx-conf key in the nginx ConfigMap.
           name: nginx #name of congifmap
           items: #You're sourcing this volume from a ConfigMap ie You're telling Kubernetes to create a volume using the data stored in a ConfigMap.
           #You're using a ConfigMap to provide data that will be available to the container as files via a volume. 
@@ -133,7 +133,7 @@ spec:
         volumeMounts: #To mount the volume you created above
         - name: nginx-conf     
           mountPath: /etc/nginx/nginx.conf #This is the filename it will be mounted as inside the volume. ie  Static config volume which is used to  Mount a config file (filebeat.yml) into Filebeat’s container. And  Not meant to be shared — it’s mounted read-only by one container, for configuration only.
-          subPath: nginx.conf
+          subPath: nginx.conf #nginx.conf is a file not directory so use subpath++++ It means: "Mount just one file from the volume into this exact path, instead of the whole volume (folder)." If you don’t use subPath, and you mount the volume to /etc/nginx, then the whole volume (which might have several files from the ConfigMap) is mounted into that directory. But "I'm already specifying the full file path using mountPath: /etc/nginx/nginx.conf, so why do I need subPath?". Kubernetes will still try to mount the entire volume ie a directory to /etc/nginx/nginx.conf. Without subPath, Kubernetes always tries to mount the whole volume (usually as a directory) to whatever mountPath you give. But that’s a problem! Why? Because /etc/nginx/nginx.conf is expected to be a file, not a directory — and the mount will fail.
           readOnly: true #This means no one can change this configuration even if they logged into the container
 ---
 #Setting up a clusterip to connect catalogue to web

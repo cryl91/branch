@@ -1,3 +1,4 @@
+#Before running the code install the ingress controller like ALB,nginx
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -40,17 +41,17 @@ kind: Ingress
 metadata:
     name: app1
     annotations:
-        alb.ingress.kubernetes.io/scheme: internet-facing
-        alb.ingress.kubernetes.io/target-type: ip
+        alb.ingress.kubernetes.io/scheme: internet-facing #You're telling Kubernetes: "Hey, I want this Ingress to be handled by the controller registered with ingressClassName: alb." Create an internet-facing ALB (as opposed to internal-only
+        alb.ingress.kubernetes.io/target-type: ip #Route traffic directly to Pod IPs instead of NodePort (alternative: instance)
         alb.ingress.kubernetes.io/tags: Environment=dev,Project=roboshop
-        alb.ingress.kubernetes.io/group.name: joindevops #If you give the group name then all the applications will attach to the same load balancer. If not it will create multiple load balancers 
+        alb.ingress.kubernetes.io/group.name: joindevops #If you give the group name then all the applications will attach to the same load balancer. If not it will create multiple load balancers. ie Use a shared ALB for multiple Ingress objects (based on group name)
 spec:
   ingressClassName: alb
   rules:
   - host: "app1.joindevops.online"
     http:
       paths: 
-      - path: / #path: / means: Match any request that starts with /, like: http://app2.joindevops.online/ or http://app2.joindevops.online/index.html
+      - path: / # Represents hostname based routing. For path based routing we give "path: /app1"
         pathType: Prefix
         backend:
           service:
