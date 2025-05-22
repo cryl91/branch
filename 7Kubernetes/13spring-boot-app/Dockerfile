@@ -5,7 +5,8 @@ FROM adoptopenjdk/openjdk11:alpine-jre
 # Simply the artifact path
 ARG artifact=target/spring-boot-web.jar
 
-WORKDIR /opt/app
+#If the /opt/app directory does not already exist in the base image, Workdir will automatically create it for you.
+WORKDIR /opt/app 
 
 COPY ${artifact} app.jar
 

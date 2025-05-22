@@ -39,9 +39,12 @@ pipeline {
       steps {
         script {
             sh 'cd java-maven-sonar-argocd-helm-k8s/spring-boot-app && docker build -t ${DOCKER_IMAGE} .'
-            def dockerImage = docker.image("${DOCKER_IMAGE}") //docker.image(...) doesn't build or pull — it just represents the image, so you can run commands on it later (like push, run, etc.).
+            def dockerImage = docker.image("${DOCKER_IMAGE}") //docker.image(...) doesn't build or pull — it just represents the image, so you can run commands on it later (like push, run, etc.). def in Groovy (the language Jenkins pipelines use). The keyword def is used to define a variable without explicitly specifying its type.
+
+
             docker.withRegistry('https://index.docker.io/v1/', "docker-cred") { //This wraps the following block with Docker registry authentication. 'https://index.docker.io/v1/' is the URL for Docker Hub. "docker-cred" is the ID of your Jenkins credentials (stored under Credentials → Docker).
                 dockerImage.push() //This command pushes the Docker image (which was defined earlier) to the Docker registry. It uses the authenticated session from withRegistry.
+                // You can push directly with docker.image("name").push() without defining it as  def dockerImage = docker.image("${DOCKER_IMAGE}"). But if you're going to reuse the image, define it as a variable with def dockerImage = docker.image(...) for clarity and flexibility.
             }
         }
       }
