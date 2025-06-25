@@ -1,5 +1,5 @@
 [web]
-34.228.156.31 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/Linux/Ansible/ansible.pem
+34.228.156.31 ansible_user=ec2-user ansible_ssh_private_key_file=/home/ec2-user/Linux/2Ansible/ansible.pem
 
 [web:vars]
 mongo_username=cyril
