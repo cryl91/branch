@@ -11,7 +11,8 @@
     }
   }
 
-#Target Group
+#Target Group = An AWS Target Group is a logical group of backend resources (typically EC2 instances, IP addresses, or Lambda functions) that an Elastic Load Balancer (ALB/NLB) sends traffic to.
+#This defines a target group named "catalogue", which Listens on port 8080, Expects HTTP traffic and Belongs to a specific VPC. 
 resource "aws_lb_target_group" "catalogue" {
   name     = "catalogue"
   port     = 8080
@@ -19,11 +20,11 @@ resource "aws_lb_target_group" "catalogue" {
   vpc_id   = "vpc-0dfc63964a304e93b"
   #Enable a health check
   health_check {
-    enabled = true
+    enabled = true #Turns on health checking
+    path = "/health" #ALB hits this URL on each instance
     healthy_threshold = 2 #consider as health if 2 health check are success ie url is called 2 times and if both times url is not responding then its unhealthy
-    interval = 15
-    matcher = "200-299"
-    path = "/health"
+    interval = 15 #Check every 15 seconds
+    matcher = "200-299" #Consider response "healthy" only if status is 2xx
     port = 8080
     protocol = "HTTP"
     timeout = 5 #if you dont get response within 5 seconds then we can consider it as failure
@@ -92,7 +93,7 @@ resource "aws_launch_template" "catalogue" {
     }
   }
 
-#user_data = file("${path.module}/catalogue.sh") #create a catalogue.sh file in the same directory to run shell commands once the instance is created
+#user_data = file("${path.module}/catalogue.sh") #The file() function in Terraform reads the contents of a local file and returns it as a string. Here Create a catalogue.sh file in the same directory to run shell commands once the instance is created
 }
 
 resource "aws_autoscaling_group" "aag" {
