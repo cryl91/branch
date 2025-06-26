@@ -42,7 +42,7 @@ resource "aws_lb_listener" "listener1" {
   default_action {
     type = "fixed-response" #If you dont have instance, but to check its working, it will display fixed-response
 
-    
+//Listens on a specific port (e.g., 80 for HTTP, 443 for HTTPS) and Defines a default action (e.g., return a fixed response, forward to a target group)    
   fixed_response {
       content_type = "text/plain"
       message_body = "Fixed response content"
@@ -53,7 +53,7 @@ resource "aws_lb_listener" "listener1" {
 }
 
 
-#Creating Listener's Rule
+#Creating Listener's Rule = It defines path-based or host-based routing to a specific URL. 
 resource "aws_lb_listener_rule" "static" {
   listener_arn = aws_lb_listener.listener1.arn 
   priority     = 10

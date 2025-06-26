@@ -135,7 +135,7 @@ resource "aws_instance" "publicinstance" {
    ami                     = "ami-08b5b3a93ed654d19"
    instance_type           = "t2.micro"
    subnet_id = aws_subnet.subnetpublic.id
-   vpc_security_group_ids = [aws_security_group.sg.id]
+   vpc_security_group_ids = [aws_security_group.sg.id] //You must use vpc_security_group_ids for instances launched in a VPC (which is almost always the case now). 
    associate_public_ip_address = "true"
    } 
 
