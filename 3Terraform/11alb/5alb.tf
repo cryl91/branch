@@ -52,8 +52,7 @@ resource "aws_lb_listener" "listener1" {
 }
 }
 
-
-#Creating Listener's Rule = It defines path-based or host-based routing to a specific URL. 
+#Creating Listener's Rule = It defines path-based or host-based routing to a specific URL. Listener rule is optional unless you want routing.
 resource "aws_lb_listener_rule" "static" {
   listener_arn = aws_lb_listener.listener1.arn 
   priority     = 10
