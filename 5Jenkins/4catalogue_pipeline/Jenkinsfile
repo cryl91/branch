@@ -65,7 +65,7 @@ pipeline {
             //     groupId: 'com.roboshop',
             //     version: "packageversion", //Put the version variable here
             //     repository: 'catalogue',
-            //     credentialsId: 'Nexux-auth', //create  t his in manage jenkins->credentials->system->global credentials->add creadentials->username,password,id->add id to this code here
+            //     credentialsId: 'Nexux-auth', //create this in manage jenkins->credentials->system->global credentials->add creadentials->username,password,id->add id to this code here
             //     artifacts: [
             //         [artifactId: catalogue,
             //         classifier: '',
