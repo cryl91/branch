@@ -124,6 +124,6 @@ resource "aws_instance" "publicinstance" {
    subnet_id = aws_subnet.subnetpublic.id
    vpc_security_group_ids = [aws_security_group.sg.id]
    associate_public_ip_address = "true"
-   user_data = file("install.sh")
+   user_data = file("install.sh") //Reads the shell script (install.sh) and passes it as user data and the script runs on the EC2 instance at launch. This is used inside an aws_instance resource. 
    } 
 

@@ -20,7 +20,7 @@ resource "aws_instance" "remote" {
     type     = "ssh"
     user     = "root"
     password = "devops123"
-  //private_key = file("Public-key")
+  //private_key = file("Private-key") = Reads the private SSH key file and Allows Terraform to SSH into the EC2 instance. While user_data = file("install.sh") Reads the shell script (install.sh) and passes it as user data and the script runs on the EC2 instance at launch
     host     = self.public_ip //In the connection block in Terraform (used with provisioners like remote-exec), the host parameter tells Terraform where to connect — i.e., the IP address or DNS name of the remote machine (like an EC2 instance). Self meanas a shortcut to refer to the current resource (aws_instance.myinstance in this case). Here it Gets the public IP address assigned to the EC2 instance when it was created.
   }
 

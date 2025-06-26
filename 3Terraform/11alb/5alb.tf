@@ -18,10 +18,10 @@ resource "aws_lb_target_group" "catalogue" {
   port     = 8080
   protocol = "HTTP"
   vpc_id   = "vpc-0dfc63964a304e93b"
-  #Enable a health check
+  #Health Check ensures only healthy targets get traffic = ALB will only send requests to EC2 instances that: Respond to /health, Return HTTP 2xx codes and Respond within 5 seconds. 
   health_check {
     enabled = true #Turns on health checking
-    path = "/health" #ALB hits this URL on each instance
+    path = "/health" #Special endpoint used to report whether an application is healthy and ready to receive traffic. No, /health is not the endpoint that ALB sends regular traffic to. /health is used only for health checks by the ALB — not for serving actual user traffic.
     healthy_threshold = 2 #consider as health if 2 health check are success ie url is called 2 times and if both times url is not responding then its unhealthy
     interval = 15 #Check every 15 seconds
     matcher = "200-299" #Consider response "healthy" only if status is 2xx
@@ -65,7 +65,7 @@ resource "aws_lb_listener_rule" "static" {
 
   condition {
     host_header {
-      values = ["catalogue.app.joindevops.online"] #define this in route 53
+      values = ["catalogue.app.joindevops.online"] #This is the ALB endpoint where the requests are forwarded to. 
     } #path based means = values = ["/catalogue/*"]
   }
 }
