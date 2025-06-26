@@ -1,6 +1,5 @@
-//Creating role
-
-
+//Creating role = Role+ Policy Attach+ Instance Profile+ Attach to ec2 instance
+//Users are for humans while Roles are for resources like ec2 instances, etc. Permissions are privilages for users and roles. 
 resource "aws_iam_role" "ec2" {
   name = "ec2_role"
 

@@ -7,7 +7,7 @@ resource "aws_instance" "myinstance" {
 
   provisioner "local-exec" {
     command = "echo ${self.private_ip} > file1"
-  }
+  } 
 } 
 
 #This is Remote Exec
@@ -21,7 +21,7 @@ resource "aws_instance" "remote" {
     user     = "root"
     password = "devops123"
   //private_key = file("Public-key")
-    host     = self.public_ip //Self meanas a shortcut to refer to the current resource (aws_instance.myinstance in this case). Here it Gets the public IP address assigned to the EC2 instance when it was created.
+    host     = self.public_ip //In the connection block in Terraform (used with provisioners like remote-exec), the host parameter tells Terraform where to connect — i.e., the IP address or DNS name of the remote machine (like an EC2 instance). Self meanas a shortcut to refer to the current resource (aws_instance.myinstance in this case). Here it Gets the public IP address assigned to the EC2 instance when it was created.
   }
 
   provisioner "remote-exec" {

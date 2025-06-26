@@ -88,7 +88,11 @@ resource "aws_eip" "eip" {
   domain   = "vpc"
 }
 
-#Creating NAT Gateway
+#Creating NAT Gateway = Traffic Flow: 1. EC2 in private subnet sends request (e.g., to yum update)
+#2. Route table sends 0.0.0.0/0 to NAT Gateway
+#3. NAT Gateway uses its Elastic IP to access the internet
+#4. Responses come back via the NAT Gateway
+
 resource "aws_nat_gateway" "nat1" {
   allocation_id = aws_eip.eip.id
   subnet_id     = aws_subnet.subnetpublic.id #Public subnet id give here
