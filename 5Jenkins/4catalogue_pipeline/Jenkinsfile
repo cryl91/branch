@@ -48,9 +48,10 @@ pipeline {
                 sh 'ls -ltr'
                 sh''' 
                 cd Jenkins/catalogue_pipeline
-                zip -r catalogue.zip ./* --exclude=.git --exclude=.zip
+                zip -r catalogue.zip ./* --exclude=.git --exclude=.zip 
                 '''           
-                //or use this = zip -r catalogue.zip . -x "*.git*" "*.zip"
+                //-r = Recursive – include subdirectories + ./* = Include all files and folders in current directory
+                //or use this = zip -r catalogue.zip . -x "*.git*" "*.zip" 
             }
         }
         //Install pipeline utility steps plugin, if not installed. It adds a set of common helper functions to Jenkins Declarative and Scripted Pipelines — especially for dealing with files, archives, JSON, YAML, properties files, and more.
@@ -64,7 +65,7 @@ pipeline {
             //     groupId: 'com.roboshop',
             //     version: "packageversion", //Put the version variable here
             //     repository: 'catalogue',
-            //     credentialsId: 'Nexux-auth', //crea  te  t his in manage jenkins->credentials->system->global credentials->add creadentials->username,password,id->add id to this code here
+            //     credentialsId: 'Nexux-auth', //create  t his in manage jenkins->credentials->system->global credentials->add creadentials->username,password,id->add id to this code here
             //     artifacts: [
             //         [artifactId: catalogue,
             //         classifier: '',
