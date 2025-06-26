@@ -10,7 +10,7 @@ resource "aws_key_pair" "generated" {
 
 
 resource "aws_instance" "myinstance" {
-   count = "1"
+   #count = "1"
    ami                     = var.ami_id
    instance_type           = var.instance_name == "mongodb" ? "t2.micro" : "t2.small"
    key_name      = aws_key_pair.generated.key_name
