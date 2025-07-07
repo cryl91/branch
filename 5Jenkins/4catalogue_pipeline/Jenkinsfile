@@ -80,7 +80,7 @@ pipeline {
         stage('Calling Deployment') { 
             steps {
                 script{
-                def params = [ //to use paramters use params keyword.
+                def params = [ //to use paramters use def keyword.
                 string(name: 'version', defaultValue: "$packageversion", description: 'Which version to deploy?')
                 ]
                 echo 'Calling Deployment Pipeline'

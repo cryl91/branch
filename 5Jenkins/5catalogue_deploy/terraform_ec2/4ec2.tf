@@ -15,7 +15,7 @@ resource "aws_instance" "catalogue" {
 
     tags = var.tags
  } 
-
+//The null_resource is a meta-resource in Terraform that doesn’t create any real cloud infrastructure, but is used to execute provisioners (e.g., local-exec, remote-exec) or add logic via triggers
  resource "null_resource" "cluster" {
   //Be used to trigger actions only when certain inputs change
   triggers = {
@@ -28,7 +28,8 @@ connection {
   type = "ssh"
   user = "centos"
   password = "devops123"
-  host= self.private_ip
+  host= self.private_ip // self.private_ip = private IP of aws_instance.myserver. Terraform will attempt to SSH into that IP using the provided credentials
+//Connecting from within the same VPC = self.private_ip + Connecting from your laptop or internet =	self.public_ip
 }
 
 //to copy the file into a folder

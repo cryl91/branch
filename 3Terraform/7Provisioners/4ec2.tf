@@ -4,7 +4,7 @@ resource "aws_instance" "myinstance" {
    instance_type           = var.instance_type
    #instance_type = data.aws_ssm_parameter.instance_type.value #to use the parameter store value 
     tags = var.tags
-
+//local-exec runs on the machine where Terraform is executed ie  Will run on yourterraform server, not on the EC2 instance you're creating
   provisioner "local-exec" {
     command = "echo ${self.private_ip} > file1"
   } 
