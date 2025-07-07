@@ -29,4 +29,4 @@ services:
     #   - catalogue
     #   - user 
    
-  #command: Optional, replace the default CMD specified by the image. 
+  #command: Optional, replace the default CMD specified by the image.. 
